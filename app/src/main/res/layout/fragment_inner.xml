@@ -1,0 +1,262 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.xinyi.studyabroad.fragments.academyInnerFragment.InnerFragment">
+
+    <com.xinyi.studyabroad.weight.VerticalScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:orientation="vertical">
+
+            <!--推荐-->
+            <LinearLayout
+                android:padding="10dp"
+                android:id="@+id/recommend_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:text="@string/recommentTitleString"
+                    android:textSize="@dimen/tv_15sp"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:text="@string/recommentSubTitleString"
+                    android:textSize="@dimen/tv_12sp"
+                    android:textColor="@color/colorSubTitle"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        
+                        <TextView
+                            android:text="@string/eg1"
+                            android:textSize="@dimen/tv_13sp"
+                            android:textColor="@color/colorMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        
+                        <TextView
+                            android:text="@string/eg2"
+                            android:textSize="@dimen/tv_10sp"
+                            android:textColor="@color/colorMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/moreString"
+                        android:textSize="@dimen/tv_10sp"
+                        android:textColor="@color/colorMain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+
+                <com.xinyi.studyabroad.weight.CustomViewPager
+                    android:layout_marginTop="10dp"
+                    android:id="@+id/recommendTop_Viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.xinyi.studyabroad.weight.CustomViewPager>
+
+
+                <RelativeLayout
+                    android:layout_marginTop="15dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <LinearLayout
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:text="@string/eg3"
+                            android:textSize="@dimen/tv_13sp"
+                            android:textColor="@color/colorMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                        <TextView
+                            android:text="@string/eg2"
+                            android:textSize="@dimen/tv_10sp"
+                            android:textColor="@color/colorMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:text="@string/moreString"
+                        android:textSize="@dimen/tv_10sp"
+                        android:textColor="@color/colorMain"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+                </RelativeLayout>
+
+
+                <com.xinyi.studyabroad.weight.CustomViewPager
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/recommendBottom_Viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.xinyi.studyabroad.weight.CustomViewPager>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorLine" />
+
+            <!--热门专业-->
+            <LinearLayout
+                android:padding="10dp"
+                android:id="@+id/hot_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:text="@string/hotTitleString"
+                    android:textSize="@dimen/tv_15sp"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:text="@string/hotSubTitleString"
+                    android:textSize="@dimen/tv_12sp"
+                    android:textColor="@color/colorSubTitle"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <com.xinyi.studyabroad.weight.CustomViewPager
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/hot_Viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.xinyi.studyabroad.weight.CustomViewPager>
+
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorLine" />
+
+            <!--地区-->
+            <LinearLayout
+                android:padding="10dp"
+                android:id="@+id/area_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:text="@string/areaTitleString"
+                    android:textSize="@dimen/tv_15sp"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:text="@string/areaSubTitleString"
+                    android:textSize="@dimen/tv_12sp"
+                    android:textColor="@color/colorSubTitle"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <com.xinyi.studyabroad.weight.CustomViewPager
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/area_Viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.xinyi.studyabroad.weight.CustomViewPager>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="5dp"
+                android:background="@color/colorLine" />
+
+            <!--排名-->
+            <LinearLayout
+                android:padding="10dp"
+                android:id="@+id/ranking_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textStyle="bold"
+                    android:text="@string/rankingTitleString"
+                    android:textSize="@dimen/tv_15sp"
+                    android:textColor="@color/colorBlack"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_marginTop="2dp"
+                    android:text="@string/rankingSubTitleString"
+                    android:textSize="@dimen/tv_12sp"
+                    android:textColor="@color/colorSubTitle"
+                    android:gravity="center_horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
+
+
+                <com.xinyi.studyabroad.weight.CustomViewPager
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:id="@+id/ranking_Viewpager"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"></com.xinyi.studyabroad.weight.CustomViewPager>
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+
+    </com.xinyi.studyabroad.weight.VerticalScrollView>
+
+</LinearLayout>

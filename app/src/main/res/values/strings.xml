@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Study Abroad</string>
+    <string name="footer_academyString">院校</string>
+    <string name="footer_tutorString">导师</string>
+    <string name="footer_findString">发现</string>
+    <string name="footer_mineString">我的</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="americaString">美国</string>
+    <string name="amademyTitleString">InnoEdu</string>
+    <string name="interesedString">你感兴趣的信息</string>
+    <string name="recommentTitleString">— 推荐院校 —</string>
+    <string name="hotTitleString">— 热门专业 —</string>
+    <string name="areaTitleString">— 热门地区 —</string>
+    <string name="rankingTitleString">— 排名 —</string>
+    <string name="recommentSubTitleString">总有一所学校适合你</string>
+    <string name="hotSubTitleString">最受学生欢迎的专业</string>
+    <string name="areaSubTitleString">学生最喜欢的地区前10</string>
+    <string name="rankingSubTitleString">排名最靠前的10所学校</string>
+    <string name="moreString">查看更多</string>
+
+
+
+    <string name="eg1">常青藤学校</string>
+    <string name="eg2">Northeasten University</string>
+    <string name="eg3">其他高校</string>
+    <string name="eg4">纽约</string>
+    <string name="eg5">New York</string>
+
+    <string-array name="academy_tab">
+        <item>推荐</item>
+        <item>专业</item>
+        <item>地区</item>
+        <item>排名</item>
+    </string-array>
+
+
+</resources>
