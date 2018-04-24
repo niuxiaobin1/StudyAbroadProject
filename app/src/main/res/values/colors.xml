@@ -4,11 +4,22 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorWhite1">#FFFFFFFF</color>
+    <color name="colorWhite2">#01FFFFFF</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorTransparentBlack">#88000000</color>
     <color name="colorFooter">#656565</color>
     <color name="colorMain">#656565</color>
     <color name="colorSearchHint">#D6D2D2</color>
     <color name="colorTabSelected">#FFCF42</color>
     <color name="colorLine">#D6D2D2</color>
     <color name="colorSubTitle">#9B9B9B</color>
+    <color name="colorpinkColor">#FF5239</color>
+    <color name="colorStrokeColor">#CFCBCB</color>
+    <color name="colorGrayColor">#F6F6F6</color>
+    <color name="colorBlueColor">#338DFE</color>
+    <color name="colorLoginBgColor">#B9BABD</color>
+    <color name="colorLoginBtnColor">#FFBF04</color>
+    <color name="loginWayColor">#B4B4B5</color>
+    <drawable name="color_title_transparent">#ffFFFFFF</drawable>
 </resources>

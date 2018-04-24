@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">Study Abroad</string>
-    <string name="footer_academyString">院校</string>
-    <string name="footer_tutorString">导师</string>
-    <string name="footer_findString">发现</string>
-    <string name="footer_mineString">我的</string>
+    <string name="footer_academyString">academy</string>
+    <string name="footer_tutorString">tutor</string>
+    <string name="footer_findString">find</string>
+    <string name="footer_mineString">mine</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>

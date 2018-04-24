@@ -1,6 +1,7 @@
 package com.xinyi.studyabroad.fragments.academyInnerFragment;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -15,6 +16,7 @@ import android.widget.RelativeLayout;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.activities.UniversityDetailActivity;
 import com.xinyi.studyabroad.base.BaseFragment;
 import com.xinyi.studyabroad.utils.DensityUtil;
 import com.xinyi.studyabroad.utils.GlideRoundTransform;
@@ -264,6 +266,13 @@ public class InnerFragment extends BaseFragment {
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
             container.addView(views.get(position));
+            views.get(position).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent it=new Intent(getActivity(), UniversityDetailActivity.class);
+                    startActivity(it);
+                }
+            });
             return views.get(position);
         }
 

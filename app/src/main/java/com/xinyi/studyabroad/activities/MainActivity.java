@@ -6,9 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.base.BaseActivity;
@@ -23,6 +21,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+/**
+ * 首页
+ */
 public class MainActivity extends BaseActivity {
 
     @BindView(R.id.footer_academy_tv)
