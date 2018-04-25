@@ -81,12 +81,6 @@ public class StatusBarUtil {
         }
     }
 
-    public static void hideStatusBarTint(Activity activity) {
-        transparencyBar(activity);
-        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
-        tintManager.hideStatusBarTintView();
-    }
-
 
     /**
      * 设置状态栏黑色字体图标，
@@ -109,109 +103,6 @@ public class StatusBarUtil {
         }
         return result;
     }
-
-
-    /**
-     * 根据当前滚动的距离更改statusbar颜色
-     *
-     * @param scrollY
-     */
-   public static void changeStatusBarColor(int scrollY, int fadingHeight, Activity activity) {
-
-        if (scrollY > fadingHeight) {
-            int result = StatusBarUtil.StatusBarLightMode(activity);
-
-            switch (result) {
-                case 0:
-                    StatusBarUtil.setStatusBarColor(activity, R.color.colorAccent);
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
-
-
-        } else if (scrollY < fadingHeight) {
-
-            int result = StatusBarUtil.StatusBarDarkMode(activity);
-            switch (result) {
-                case 0:
-                    StatusBarUtil.hideStatusBarTint(activity);
-                    break;
-                case 1:
-                    StatusBarUtil.transparencyBar(activity);
-                    break;
-                case 2:
-                    StatusBarUtil.transparencyBar(activity);
-                    break;
-                case 3:
-                    StatusBarUtil.transparencyBar(activity);
-                    break;
-            }
-
-
-        }
-    }
-
-    /**
-     *
-     * @param activity
-     */
-    public static void changeStatusBarDarkColor(Activity activity) {
-
-
-        int result = StatusBarUtil.StatusBarDarkMode(activity);
-        switch (result) {
-            case 0:
-
-                StatusBarUtil.hideStatusBarTint(activity);
-
-                break;
-            case 1:
-                StatusBarUtil.transparencyBar(activity);
-                break;
-            case 2:
-                StatusBarUtil.transparencyBar(activity);
-                break;
-            case 3:
-                StatusBarUtil.transparencyBar(activity);
-                break;
-        }
-
-
-    }
-
-
-
-
-    /**
-     * 更改statusbar颜色
-     *
-     * @param
-     */
-    public static void changeStatusBarColor(Activity activity) {
-
-
-            int result = StatusBarUtil.StatusBarLightMode(activity);
-
-            switch (result) {
-                case 0:
-                    StatusBarUtil.setStatusBarColor(activity, R.color.colorAccent);
-                    break;
-                case 1:
-                    break;
-                case 2:
-                    break;
-                case 3:
-                    break;
-            }
-
-
-    }
-
 
     /**
      * 已知系统类型时，设置状态栏黑色字体图标。
@@ -351,4 +242,110 @@ public class StatusBarUtil {
     public static int getStatusBarHeight(Activity activity){
         return new SystemBarTintManager(activity).getStatusBarHeight();
     }
+
+
+    /**
+     * 根据当前滚动的距离更改statusbar颜色
+     *
+     * @param scrollY
+     */
+    public static void changeStatusBarColor(int scrollY, int fadingHeight, Activity activity) {
+
+        if (scrollY > fadingHeight) {
+            int result = StatusBarUtil.StatusBarLightMode(activity);
+
+            switch (result) {
+                case 0:
+                    StatusBarUtil.setStatusBarColor(activity, R.color.colorAccent);
+                    break;
+                case 1:
+                    break;
+                case 2:
+                    break;
+                case 3:
+                    break;
+            }
+
+
+        } else if (scrollY < fadingHeight) {
+
+            int result = StatusBarUtil.StatusBarDarkMode(activity);
+            switch (result) {
+                case 0:
+                    StatusBarUtil.hideStatusBarTint(activity);
+                    break;
+                case 1:
+                    StatusBarUtil.transparencyBar(activity);
+                    break;
+                case 2:
+                    StatusBarUtil.transparencyBar(activity);
+                    break;
+                case 3:
+                    StatusBarUtil.transparencyBar(activity);
+                    break;
+            }
+
+
+        }
+    }
+
+    /**
+     *
+     * @param activity
+     */
+    public static void changeStatusBarDarkColor(Activity activity) {
+
+
+        int result = StatusBarUtil.StatusBarDarkMode(activity);
+        switch (result) {
+            case 0:
+
+                StatusBarUtil.hideStatusBarTint(activity);
+
+                break;
+            case 1:
+                StatusBarUtil.transparencyBar(activity);
+                break;
+            case 2:
+                StatusBarUtil.transparencyBar(activity);
+                break;
+            case 3:
+                StatusBarUtil.transparencyBar(activity);
+                break;
+        }
+
+
+    }
+
+
+    /**
+     * 更改statusbar颜色
+     *
+     * @param
+     */
+    public static void changeStatusBarColor(Activity activity) {
+
+
+        int result = StatusBarUtil.StatusBarLightMode(activity);
+
+        switch (result) {
+            case 0:
+                StatusBarUtil.setStatusBarColor(activity, R.color.colorAccent);
+                break;
+            case 1:
+                break;
+            case 2:
+                break;
+            case 3:
+                break;
+        }
+    }
+
+    public static void hideStatusBarTint(Activity activity) {
+        transparencyBar(activity);
+        SystemBarTintManager tintManager = new SystemBarTintManager(activity);
+        tintManager.hideStatusBarTintView();
+    }
+
+
 }

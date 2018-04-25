@@ -65,6 +65,30 @@
     <string name="telIsEmptyString">请先填写手机号</string>
     <string name="pswIsNotSameString">密码输入不一致，请重新输入</string>
     <string name="loginNoCompeleteString">登录信息填写不完整</string>
+    <string name="recommandAcademyString">推荐院校</string>
+    <string name="historySrarchString">历史搜索</string>
+    <string name="clearString">清除</string>
+    <string name="hoursUnitString">/小时</string>
+    <string name="inaugurateString">就职于&#8195;</string>
+    <string name="chargeStandardString">收费标准：</string>
+    <string name="tutorMajorString">专业：</string>
+    <string name="tutorGradeString">年级：</string>
+    <string name="tutorCategoryString">类别：</string>
+    <string name="personalProfileString">个人简介</string>
+    <string name="personalEvaluationString">个人评价</string>
+    <string name="serviceExperienceString">服务经历</string>
+    <string name="followString">关注</string>
+    <string name="subscribeString">预约</string>
+    <string name="tutorDetailString">导师详情</string>
+    <string name="readMoreString">阅读更多 →</string>
+    <string name="subscribeManagerString">预约管理</string>
+    <string name="payManagerString">支付管理</string>
+    <string name="timeManagerString">时间管理</string>
+    <string name="mypauseString">我的钱包</string>
+    <string name="myevaluationString">我的评价</string>
+    <string name="myfllowString">我的关注</string>
+    <string name="serverString">客服</string>
+    <string name="settingsString">设置</string>
 
 
     <string name="eg1">常青藤学校</string>
@@ -78,6 +102,12 @@
     <string name="eg9">90</string>
     <string name="eg10">费用</string>
     <string name="eg11">申请表：在线填写\n附加申请表：Yes</string>
+    <string name="eg12">商务英语专业</string>
+    <string name="eg13">大学二年级</string>
+    <string name="eg14">机构</string>
+    <string name="eg15">个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介个人简介</string>
+    <string name="eg16">2018.04.13 17:20:56</string>
+    <string name="eg17">美国留学如何办理</string>
 
     <string-array name="academy_tab">
         <item>推荐</item>
@@ -85,15 +115,31 @@
         <item>地区</item>
         <item>排名</item>
     </string-array>
+
     <string-array name="academyDetail_tab">
         <item>学校简介</item>
         <item>导师列表</item>
         <item>申请要求</item>
     </string-array>
+
     <string-array name="identity_list">
         <item>学生</item>
         <item>导师</item>
         <item>机构</item>
+    </string-array>
+
+    <string-array name="area_list">
+        <item>加利福利亚</item>
+        <item>德克萨斯州</item>
+        <item>纽约</item>
+        <item>华盛顿</item>
+        <item>宾夕法尼亚</item>
+    </string-array>
+
+    <string-array name="tutor_tab">
+        <item>全部</item>
+        <item>评分不高</item>
+        <item>筛选</item>
     </string-array>
 
 

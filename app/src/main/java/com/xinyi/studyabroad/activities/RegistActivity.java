@@ -347,7 +347,18 @@ public class RegistActivity extends BaseActivity {
                 .execute(new DialogCallBack(RegistActivity.this, false) {
                     @Override
                     public void onSuccess(com.lzy.okgo.model.Response<String> response) {
-                        app.startTimer(values.get(0));
+
+                        try {
+                            JSONObject js = new JSONObject(response.body());
+                            if (js.getBoolean("result")) {
+                                app.startTimer(values.get(0));
+                            } else {
+                                UIHelper.toastMsg(js.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            UIHelper.toastMsg(e.getMessage());
+                        }
+
                     }
 
                     @Override

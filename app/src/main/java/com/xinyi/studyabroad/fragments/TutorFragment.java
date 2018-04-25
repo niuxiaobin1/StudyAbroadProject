@@ -3,13 +3,34 @@ package com.xinyi.studyabroad.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.adapter.TutuorFragmentAadapter;
 import com.xinyi.studyabroad.base.BaseFragment;
+import com.xinyi.studyabroad.utils.DensityUtil;
+import com.xinyi.studyabroad.utils.DividerDecoration;
+import com.xinyi.studyabroad.utils.StatusBarUtil;
+import com.xinyi.studyabroad.weight.GlideImageLoader;
+import com.youth.banner.Banner;
+import com.youth.banner.BannerConfig;
+import com.youth.banner.Transformer;
+import com.youth.banner.listener.OnBannerListener;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import butterknife.BindAnim;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +41,26 @@ import com.xinyi.studyabroad.base.BaseFragment;
  * create an instance of this fragment.
  */
 public class TutorFragment extends BaseFragment {
+
+    private List<Integer> images;
+    private String[] tabs;
+
+    @BindView(R.id.parentView)
+    LinearLayout parentView;
+
+    @BindView(R.id.banner)
+    Banner banner;
+
+    @BindView(R.id.tabLayout)
+    TabLayout tabLayout;
+
+    @BindView(R.id.tutor_recylerView)
+    RecyclerView tutor_recylerView;
+
+
+    @BindView(R.id.collapsingToolbarLayout)
+    CollapsingToolbarLayout collapsingToolbarLayout;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,11 +107,81 @@ public class TutorFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tutor, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_tutor, container, false);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
     public void initViews() {
+        parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+
+        initBanner();
+        initTabLayout();
+
+        collapsingToolbarLayout.setMinimumHeight(DensityUtil.dip2px(getActivity(),40));
+
+        tutor_recylerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        tutor_recylerView.addItemDecoration(new DividerDecoration(getActivity(),R.color.colorLine, DensityUtil.dip2px(
+                getActivity(),1
+        )));
+        tutor_recylerView.setAdapter(new TutuorFragmentAadapter(getActivity()));
+    }
+
+    private void initBanner() {
+
+        images = new ArrayList<>();
+        images.add(R.mipmap.academy_action_bar_bg);
+        images.add(R.mipmap.academy_action_bar_bg);
+        images.add(R.mipmap.academy_action_bar_bg);
+        //设置图片加载器
+        banner.setImageLoader(new GlideImageLoader());
+        //设置banner样式
+        banner.setBannerStyle(BannerConfig.CIRCLE_INDICATOR);
+        banner.setIndicatorGravity(BannerConfig.CENTER);
+        //设置图片集合
+        banner.setImages(images);
+        //设置banner动画效果
+        banner.setBannerAnimation(Transformer.BackgroundToForeground);
+        //设置自动轮播，默认为true
+        banner.isAutoPlay(true);
+        //设置轮播时间
+        banner.setDelayTime(3000);
+        banner.setOnBannerListener(new OnBannerListener() {
+            @Override
+            public void OnBannerClick(int position) {
+
+            }
+        });
+        //banner设置方法全部调用完毕时最后调用
+        banner.start();
+    }
+
+
+    private void initTabLayout(){
+
+        tabs=getResources().getStringArray(R.array.tutor_tab);
+        for (int i = 0; i < tabs.length; i++) {
+            tabLayout.addTab(tabLayout.newTab().setText(tabs[i]));
+        }
+
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(TabLayout.Tab tab) {
+
+
+            }
+
+            @Override
+            public void onTabUnselected(TabLayout.Tab tab) {
+
+            }
+
+            @Override
+            public void onTabReselected(TabLayout.Tab tab) {
+
+            }
+        });
 
     }
 
@@ -116,5 +227,19 @@ public class TutorFragment extends BaseFragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        //开始轮播
+        banner.startAutoPlay();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        //结束轮播
+        banner.stopAutoPlay();
     }
 }

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    
+    
+    <ImageView
+        android:scaleType="fitXY"
+        android:src="@mipmap/academy_action_bar_bg"
+        android:layout_width="100dp"
+        android:layout_height="100dp" />
+    <LinearLayout
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="100dp">
+
+        <TextView
+            android:maxLines="1"
+            android:textColor="@color/colorMain"
+            android:textSize="@dimen/tv_14sp"
+            android:text="@string/eg1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:maxLines="1"
+            android:textColor="@color/colorMain"
+            android:textSize="@dimen/tv_14sp"
+            android:text="@string/eg6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:layout_marginBottom="5dp"
+            android:maxLines="1"
+            android:textColor="@color/colorSubTitle"
+            android:textSize="@dimen/tv_14sp"
+            android:text="@string/eg6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:gravity="bottom"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+            <TextView
+                android:maxLines="1"
+                android:textColor="@color/colorpinkColor"
+                android:textSize="@dimen/tv_16sp"
+                android:text="$100"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+            <TextView
+                android:maxLines="1"
+                android:textColor="@color/colorSubTitle"
+                android:textSize="@dimen/tv_13sp"
+                android:text="@string/hoursUnitString"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="100dp">
+
+        <TextView
+            android:textSize="@dimen/tv_14sp"
+            android:id="@+id/textView"
+            android:gravity="center"
+            android:paddingTop="2dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:background="@drawable/score_bg"
+            android:textColor="@color/colorWhite"
+            android:text="@string/scoreString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:textSize="@dimen/tv_14sp"
+            app:layout_constraintLeft_toLeftOf="@id/textView"
+            app:layout_constraintRight_toRightOf="@id/textView"
+            app:layout_constraintTop_toBottomOf="@id/textView"
+            android:gravity="center"
+            android:paddingBottom="2dp"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
+            android:background="@drawable/score_bottom_bg"
+            android:textColor="@color/colorpinkColor"
+            android:text="8"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</LinearLayout>

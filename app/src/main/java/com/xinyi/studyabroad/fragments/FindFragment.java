@@ -3,23 +3,50 @@ package com.xinyi.studyabroad.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.adapter.FindAdapter;
 import com.xinyi.studyabroad.base.BaseFragment;
+import com.xinyi.studyabroad.utils.DensityUtil;
+import com.xinyi.studyabroad.utils.DividerDecoration;
+import com.xinyi.studyabroad.utils.StatusBarUtil;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
+ * 发现
  * {@link FindFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link FindFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class FindFragment extends BaseFragment {
+
+    @BindView(R.id.back_image)
+    ImageView back_image;
+
+    @BindView(R.id.title_tv)
+    TextView title_tv;
+
+    @BindView(R.id.right_tv)
+    TextView right_tv;
+
+    @BindView(R.id.parentView)
+    LinearLayout parentView;
+
+    @BindView(R.id.recylerView)
+    RecyclerView recylerView;
+
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,11 +93,22 @@ public class FindFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_find, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_find, container, false);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
     public void initViews() {
+        back_image.setVisibility(View.GONE);
+        right_tv.setVisibility(View.GONE);
+        title_tv.setText(R.string.footer_findString);
+        parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+
+        recylerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
+        recylerView.addItemDecoration(new DividerDecoration(getActivity(),R.color.colorWhite,
+                DensityUtil.dip2px(getActivity(),10)));
+        recylerView.setAdapter(new FindAdapter());
 
     }
 

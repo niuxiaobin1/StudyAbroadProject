@@ -13,13 +13,16 @@
     <color name="colorSearchHint">#D6D2D2</color>
     <color name="colorTabSelected">#FFCF42</color>
     <color name="colorLine">#D6D2D2</color>
+    <color name="colorLineE0D">#E0DDDD</color>
     <color name="colorSubTitle">#9B9B9B</color>
     <color name="colorpinkColor">#FF5239</color>
     <color name="colorStrokeColor">#CFCBCB</color>
     <color name="colorGrayColor">#F6F6F6</color>
+    <color name="colorGrayE6">#E6E6E6</color>
     <color name="colorBlueColor">#338DFE</color>
     <color name="colorLoginBgColor">#B9BABD</color>
     <color name="colorLoginBtnColor">#FFBF04</color>
     <color name="loginWayColor">#B4B4B5</color>
+    <color name="blackColor4A">#4A4A4A</color>
     <drawable name="color_title_transparent">#ffFFFFFF</drawable>
 </resources>

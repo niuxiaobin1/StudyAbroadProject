@@ -1,6 +1,7 @@
 package com.xinyi.studyabroad.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -18,7 +19,9 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.activities.SearchActivity;
 import com.xinyi.studyabroad.base.BaseFragment;
+import com.xinyi.studyabroad.fragments.academyInnerFragment.InnerAreaFragment;
 import com.xinyi.studyabroad.fragments.academyInnerFragment.InnerFragment;
 import com.xinyi.studyabroad.utils.DensityUtil;
 import com.xinyi.studyabroad.utils.StatusBarUtil;
@@ -116,8 +119,16 @@ public class AcademyFragment extends BaseFragment {
         titleBar.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
         titles = getResources().getStringArray(R.array.academy_tab);
         viewPager.setOffscreenPageLimit(4);
-
         ViewCompat.setElevation(search_tv, 10);
+
+
+        search_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getActivity(), SearchActivity.class);
+                startActivity(it);
+            }
+        });
 
         initContent();
 
@@ -128,9 +139,10 @@ public class AcademyFragment extends BaseFragment {
      * init tabLayout
      */
     private void initContent() {
-        for (int i = 0; i < titles.length; i++) {
-            innersFragments.add(InnerFragment.newInstance("", ""));
-        }
+        innersFragments.add(InnerFragment.newInstance("", ""));
+        innersFragments.add(InnerAreaFragment.newInstance("", ""));
+        innersFragments.add(InnerAreaFragment.newInstance("", ""));
+        innersFragments.add(InnerAreaFragment.newInstance("", ""));
 
         innerPageAdapter = new InnerPageAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(innerPageAdapter);
@@ -144,7 +156,7 @@ public class AcademyFragment extends BaseFragment {
             public void run() {
                 invalidateTab();
             }
-        },500);
+        }, 500);
 
     }
 

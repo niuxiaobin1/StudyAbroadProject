@@ -33,6 +33,7 @@ public class BaseActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         StatusBarUtil.transparencyBar(this);
+        StatusBarUtil.StatusBarLightMode(this);
         AppManager.addActivity(this);
     }
 

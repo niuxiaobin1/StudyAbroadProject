@@ -4,22 +4,81 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.base.BaseFragment;
+import com.xinyi.studyabroad.utils.GlideCircleTransform;
+import com.xinyi.studyabroad.utils.StatusBarUtil;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
+ * 我的
  * {@link MineFragment.OnFragmentInteractionListener} interface
  * to handle interaction events.
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class MineFragment extends BaseFragment {
+
+
+    @BindView(R.id.back_image)
+    ImageView back_image;
+
+    @BindView(R.id.title_tv)
+    TextView title_tv;
+
+    @BindView(R.id.right_tv)
+    TextView right_tv;
+
+    //个人信息
+    @BindView(R.id.imageHeader)
+    ImageView imageHeader;
+
+    @BindView(R.id.topTextView)
+    TextView topTextView;
+
+    @BindView(R.id.bottomTextView)
+    TextView bottomTextView;
+    //预约管理
+    @BindView(R.id.subscribeLayout)
+    LinearLayout subscribeLayout;
+    //支付管理
+    @BindView(R.id.payManagerLayout)
+    LinearLayout payManagerLayout;
+    //时间管理
+    @BindView(R.id.timeManagerLayout)
+    LinearLayout timeManagerLayout;
+    //我的钱包
+    @BindView(R.id.mypauseLayout)
+    RelativeLayout mypauseLayout;
+    //我的评价
+    @BindView(R.id.myevaluationLayout)
+    RelativeLayout myevaluationLayout;
+    //我的关注
+    @BindView(R.id.myfllowLayout)
+    RelativeLayout myfllowLayout;
+    //客服
+    @BindView(R.id.serverLayout)
+    RelativeLayout serverLayout;
+    //设置
+    @BindView(R.id.settingsLayout)
+    RelativeLayout settingsLayout;
+
+    @BindView(R.id.parentView)
+    LinearLayout parentView;
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -66,12 +125,49 @@ public class MineFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_mine, container, false);
+        ButterKnife.bind(this, rootView);
+        return rootView;
     }
 
     @Override
     public void initViews() {
+        back_image.setVisibility(View.GONE);
+        right_tv.setVisibility(View.GONE);
+        title_tv.setText(R.string.footer_mineString);
+        title_tv.setTextColor(getResources().getColor(R.color.colorWhite));
+        parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
 
+        Glide.with(getActivity()).load(R.mipmap.banner).transform(new CenterCrop(getActivity()),
+                new GlideCircleTransform(getActivity())).into(imageHeader);
+
+
+    }
+
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (!hidden) {
+            switchLayout(0);
+        }
+    }
+
+    /**
+     * 0：学生 1：老师和机构
+     */
+    private void switchLayout(int which) {
+        if (which == 0) {
+            payManagerLayout.setVisibility(View.VISIBLE);
+            timeManagerLayout.setVisibility(View.GONE);
+            myfllowLayout.setVisibility(View.VISIBLE);
+            myevaluationLayout.setVisibility(View.GONE);
+
+        } else {
+            payManagerLayout.setVisibility(View.GONE);
+            timeManagerLayout.setVisibility(View.VISIBLE);
+            myfllowLayout.setVisibility(View.GONE);
+            myevaluationLayout.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override

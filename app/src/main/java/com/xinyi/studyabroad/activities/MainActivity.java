@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -14,6 +15,7 @@ import com.xinyi.studyabroad.fragments.AcademyFragment;
 import com.xinyi.studyabroad.fragments.FindFragment;
 import com.xinyi.studyabroad.fragments.MineFragment;
 import com.xinyi.studyabroad.fragments.TutorFragment;
+import com.xinyi.studyabroad.utils.StatusBarUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -106,6 +108,15 @@ public class MainActivity extends BaseActivity {
             }
         }
         changeFragment(which);
+
+
+        if (which == 0 || which == 3) {
+            StatusBarUtil.StatusBarDarkMode(this);
+            StatusBarUtil.transparencyBar(this);
+        } else {
+            StatusBarUtil.StatusBarLightMode(this);
+        }
+
     }
 
     private void changeFragment(int index) {
