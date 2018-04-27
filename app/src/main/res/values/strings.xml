@@ -32,6 +32,8 @@
     <string name="scoreString">评分</string>
     <string name="cancleString">取消</string>
     <string name="emptyString"></string>
+    <string name="timeslotString">时长：</string>
+    <string name="timeStartString">开始时间：</string>
 
     <string name="accountString">帐号</string>
     <string name="passwordString">密码</string>

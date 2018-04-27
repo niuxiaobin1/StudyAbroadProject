@@ -88,7 +88,8 @@ public class TutorDetailActivity extends BaseActivity {
 
     private EvaluationAdapter adapter;
 
-    private String teacher_user_token = "909aad09981410ac5e399399419f192d";
+    public static final String TEACHER_USER_TOKEN="_teacher_user_token";
+    private String teacher_user_token = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +104,7 @@ public class TutorDetailActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
-
+        teacher_user_token=getIntent().getStringExtra(TEACHER_USER_TOKEN);
         initTitle(R.string.tutorDetailString);
         hideRightTv();
         initBanner();
