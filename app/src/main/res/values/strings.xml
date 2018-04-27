@@ -31,6 +31,7 @@
     <string name="majorString">专业</string>
     <string name="scoreString">评分</string>
     <string name="cancleString">取消</string>
+    <string name="emptyString"></string>
 
     <string name="accountString">帐号</string>
     <string name="passwordString">密码</string>
@@ -89,6 +90,16 @@
     <string name="myfllowString">我的关注</string>
     <string name="serverString">客服</string>
     <string name="settingsString">设置</string>
+    <string name="clickLoginString">点击登录</string>
+    <string name="firstLoginString">请您先登录</string>
+    <string name="serviceDateString">服务日期</string>
+    <string name="serviceTimeString">服务时段</string>
+    <string name="serviceStartTimeString">开始时间</string>
+    <string name="StartTimehintString">点击选择时间</string>
+    <string name="consulationhintString">请输入想咨询的内容</string>
+    <string name="consulationString">咨询内容</string>
+    <string name="ensureScribeString">确认预约</string>
+    <string name="totalString">合计：</string>
 
 
     <string name="eg1">常青藤学校</string>

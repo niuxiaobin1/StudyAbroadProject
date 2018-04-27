@@ -17,27 +17,28 @@
             android:layout_height="150dp">
 
             <ImageView
+                android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/banner_e" />
+                />
 
             <TextView
+                android:id="@+id/newsName"
                 android:textSize="@dimen/tv_16sp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:background="@color/colorTransparentBlack"
                 android:padding="10dp"
-                android:text="@string/eg17"
                 android:textColor="@color/colorWhite" />
         </RelativeLayout>
 
 
         <com.xinyi.studyabroad.weight.EllipsizingTextView
+            android:id="@+id/newsDetail"
             android:ellipsize="end"
             android:maxLines="3"
-            android:text="@string/eg15"
             android:textColor="@color/colorSubTitle"
             android:textSize="@dimen/tv_14sp"
             android:padding="10dp"

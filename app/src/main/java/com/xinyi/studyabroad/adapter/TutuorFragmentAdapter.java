@@ -11,54 +11,55 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xinyi.studyabroad.R;
-import com.xinyi.studyabroad.activities.FindDetailActivity;
-import com.xinyi.studyabroad.weight.EllipsizingTextView;
+import com.xinyi.studyabroad.activities.TutorDetailActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 /**
- * Created by Niu on 2018/4/25.
+ * Created by Niu on 2018/4/24.
  */
 
-public class FindAdapter extends BaseAdapter<FindAdapter.ViewHolder> {
-
+public class TutuorFragmentAdapter extends BaseAdapter<TutuorFragmentAdapter.ViewHolder> {
 
     private Context context;
 
-    public FindAdapter(Context context) {
+    public TutuorFragmentAdapter(Context context) {
         super();
         this.context = context;
     }
 
-
-
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.find_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.tutor_fragment_item, parent, false);
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
-        final Map<String, String> map = datas.get(position);
+        if (datas.size() == 0) {
+            return;
+        }
+        Map<String, String> map = datas.get(position);
         Glide.with(context).load(map.get("image")).into(holder.imageView);
-        holder.newsName.setText(map.get("name"));
-        holder.newsDetail.setText(map.get("description"));
+        holder.tutor_name.setText(map.get("true_name"));
+        holder.tutor_workInfo.setText(map.get("school_name"));
+        holder.tutor_serviceInfo.setText(map.get("service_name"));
+        holder.tutor_price.setText(map.get("money_sign") + map.get("service_price"));
+        holder.tutor_unit.setText("/" + map.get("charge_unit"));
+        holder.tutor_score.setText(map.get("points"));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent it = new Intent(context, FindDetailActivity.class);
-                it.putExtra(FindDetailActivity.NEWS_ID, map.get("id"));
+                Intent it = new Intent(context, TutorDetailActivity.class);
                 context.startActivity(it);
             }
         });
+
     }
 
     @Override
@@ -70,10 +71,18 @@ public class FindAdapter extends BaseAdapter<FindAdapter.ViewHolder> {
 
         @BindView(R.id.imageView)
         ImageView imageView;
-        @BindView(R.id.newsName)
-        TextView newsName;
-        @BindView(R.id.newsDetail)
-        EllipsizingTextView newsDetail;
+        @BindView(R.id.tutor_name)
+        TextView tutor_name;
+        @BindView(R.id.tutor_workInfo)
+        TextView tutor_workInfo;
+        @BindView(R.id.tutor_serviceInfo)
+        TextView tutor_serviceInfo;
+        @BindView(R.id.tutor_price)
+        TextView tutor_price;
+        @BindView(R.id.tutor_unit)
+        TextView tutor_unit;
+        @BindView(R.id.tutor_score)
+        TextView tutor_score;
 
         public ViewHolder(View itemView) {
             super(itemView);

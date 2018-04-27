@@ -9,8 +9,8 @@
     
     
     <ImageView
-        android:scaleType="fitXY"
-        android:src="@mipmap/academy_action_bar_bg"
+        android:id="@+id/imageView"
+        android:scaleType="centerCrop"
         android:layout_width="100dp"
         android:layout_height="100dp" />
     <LinearLayout
@@ -22,27 +22,27 @@
         android:layout_height="100dp">
 
         <TextView
+            android:id="@+id/tutor_name"
             android:maxLines="1"
             android:textColor="@color/colorMain"
             android:textSize="@dimen/tv_14sp"
-            android:text="@string/eg1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tutor_workInfo"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="5dp"
             android:maxLines="1"
             android:textColor="@color/colorMain"
             android:textSize="@dimen/tv_14sp"
-            android:text="@string/eg6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tutor_serviceInfo"
             android:layout_marginBottom="5dp"
             android:maxLines="1"
             android:textColor="@color/colorSubTitle"
             android:textSize="@dimen/tv_14sp"
-            android:text="@string/eg6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -53,17 +53,18 @@
             android:layout_height="0dp"
             android:layout_weight="1">
             <TextView
+                android:id="@+id/tutor_price"
                 android:maxLines="1"
                 android:textColor="@color/colorpinkColor"
                 android:textSize="@dimen/tv_16sp"
-                android:text="$100"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/tutor_unit"
                 android:maxLines="1"
                 android:textColor="@color/colorSubTitle"
                 android:textSize="@dimen/tv_13sp"
-                android:text="@string/hoursUnitString"
+                android:text=""
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -71,6 +72,7 @@
 
     </LinearLayout>
     <android.support.constraint.ConstraintLayout
+        android:id="@+id/scoreLayout"
         android:layout_width="wrap_content"
         android:layout_height="100dp">
 
@@ -87,6 +89,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
         <TextView
+            android:id="@+id/tutor_score"
             android:textSize="@dimen/tv_14sp"
             app:layout_constraintLeft_toLeftOf="@id/textView"
             app:layout_constraintRight_toRightOf="@id/textView"
@@ -97,7 +100,6 @@
             android:paddingRight="5dp"
             android:background="@drawable/score_bottom_bg"
             android:textColor="@color/colorpinkColor"
-            android:text="8"
             android:layout_width="0dp"
             android:layout_height="wrap_content" />
 

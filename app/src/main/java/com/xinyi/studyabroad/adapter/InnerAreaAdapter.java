@@ -20,11 +20,12 @@ import butterknife.ButterKnife;
  * Created by Niu on 2018/4/24.
  */
 
-public class InnerAreaAdapter extends RecyclerView.Adapter<InnerAreaAdapter.ViewHolder> {
+public class InnerAreaAdapter extends BaseAdapter<InnerAreaAdapter.ViewHolder> {
 
     private Context context;
 
     public InnerAreaAdapter(Context context){
+        super();
         this.context=context;
     }
 

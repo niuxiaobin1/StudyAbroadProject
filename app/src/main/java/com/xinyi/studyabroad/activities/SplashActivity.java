@@ -21,12 +21,14 @@ public class SplashActivity extends BaseActivity {
         findViewById(R.id.rootView).postDelayed(new Runnable() {
             @Override
             public void run() {
-                Intent it = new Intent(SplashActivity.this, LoginActivity.class);
+                Intent it = new Intent(SplashActivity.this, MainActivity.class);
                 startActivity(it);
                 finish();
             }
         }, 3000);
     }
+
+
 
 
     private void checkLanguage() {

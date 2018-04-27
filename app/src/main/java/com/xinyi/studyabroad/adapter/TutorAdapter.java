@@ -23,14 +23,14 @@ import butterknife.ButterKnife;
  * Created by Niu on 2018/4/20.
  */
 
-public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> {
+public class TutorAdapter extends BaseAdapter<TutorAdapter.ViewHolder> {
 
     private Context context;
-    private  List<Map<String,String>> tutors;
 
     public TutorAdapter(Context context, List<Map<String,String>> tutors) {
+        super();
+        this.datas=tutors;
         this.context = context;
-        this.tutors=tutors;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Map<String,String> map=new HashMap<>();
+        Map<String,String> map=datas.get(position);
         Glide.with(context).load(map.get("image")).transform(new GlideCircleTransform(context)).into(holder.header);
         holder.tutor_name.setText(map.get("true_name"));
         holder.tutor_academy.setText(map.get("school_name"));
@@ -51,7 +51,7 @@ public class TutorAdapter extends RecyclerView.Adapter<TutorAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-        return tutors.size();
+        return datas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

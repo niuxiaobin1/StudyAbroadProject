@@ -19,18 +19,18 @@ import butterknife.ButterKnife;
  * Created by Niu on 2018/4/24.
  */
 
-public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder> {
+public class RecordAdapter extends BaseAdapter<RecordAdapter.ViewHolder> {
 
     private OnDeleteListener onDeleteListener;
-    private List<Map<String, String>> data;
+    private OnItemSelectedListener onItemSelectedListener;
 
     public RecordAdapter() {
-
+        super();
     }
 
 
     public void setData(List<Map<String, String>> data) {
-        this.data = data;
+        this.datas = data;
         notifyDataSetChanged();
     }
 
@@ -42,12 +42,21 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.contentTv.setText(data.get(position).get("title"));
+        holder.contentTv.setText(datas.get(position).get("title"));
         holder.deleteImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onDeleteListener!=null){
-                    onDeleteListener.onDelete(data.get(position).get("title"));
+                if (onDeleteListener != null) {
+                    onDeleteListener.onDelete(datas.get(position).get("title"));
+                }
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onItemSelectedListener != null) {
+                    onItemSelectedListener.onSelect(datas.get(position).get("title"));
                 }
             }
         });
@@ -59,13 +68,21 @@ public class RecordAdapter extends RecyclerView.Adapter<RecordAdapter.ViewHolder
         void onDelete(String title);
     }
 
+    public interface OnItemSelectedListener {
+        void onSelect(String title);
+    }
+
+    public void setOnItemSelectedListener(OnItemSelectedListener onItemSelectedListener) {
+        this.onItemSelectedListener = onItemSelectedListener;
+    }
+
     public void setOnDeleteListener(OnDeleteListener onDeleteListener) {
         this.onDeleteListener = onDeleteListener;
     }
 
     @Override
     public int getItemCount() {
-        return data.size();
+        return datas.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

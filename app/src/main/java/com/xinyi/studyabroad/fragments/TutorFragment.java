@@ -1,6 +1,7 @@
 package com.xinyi.studyabroad.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -12,9 +13,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.xinyi.studyabroad.R;
-import com.xinyi.studyabroad.adapter.TutuorFragmentAadapter;
+import com.xinyi.studyabroad.activities.TutorListActivity;
+import com.xinyi.studyabroad.adapter.TutuorFragmentAdapter;
 import com.xinyi.studyabroad.base.BaseFragment;
 import com.xinyi.studyabroad.utils.DensityUtil;
 import com.xinyi.studyabroad.utils.DividerDecoration;
@@ -28,7 +31,6 @@ import com.youth.banner.listener.OnBannerListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindAnim;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -44,6 +46,9 @@ public class TutorFragment extends BaseFragment {
 
     private List<Integer> images;
     private String[] tabs;
+
+    @BindView(R.id.search_layout)
+    RelativeLayout search_layout;
 
     @BindView(R.id.parentView)
     LinearLayout parentView;
@@ -125,7 +130,15 @@ public class TutorFragment extends BaseFragment {
         tutor_recylerView.addItemDecoration(new DividerDecoration(getActivity(),R.color.colorLine, DensityUtil.dip2px(
                 getActivity(),1
         )));
-        tutor_recylerView.setAdapter(new TutuorFragmentAadapter(getActivity()));
+        tutor_recylerView.setAdapter(new TutuorFragmentAdapter(getActivity()));
+
+        search_layout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it=new Intent(getActivity(), TutorListActivity.class);
+                startActivity(it);
+            }
+        });
     }
 
     private void initBanner() {

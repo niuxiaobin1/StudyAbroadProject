@@ -41,9 +41,9 @@
 
 
                 <TextView
+                    android:id="@+id/tutor_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/eg2"
                     android:textColor="@color/colorMain"
                     android:textSize="@dimen/tv_14sp" />
 
@@ -63,9 +63,9 @@
                         android:textSize="@dimen/tv_14sp" />
 
                     <TextView
+                        android:id="@+id/tutor_workInfo"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eg2"
                         android:textColor="@color/colorMain"
                         android:textSize="@dimen/tv_14sp" />
                 </LinearLayout>
@@ -90,6 +90,7 @@
                         android:textSize="@dimen/tv_14sp" />
 
                     <TextView
+                        android:id="@+id/tutor_standard"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
@@ -98,10 +99,10 @@
                         android:textSize="@dimen/tv_16sp" />
 
                     <TextView
+                        android:id="@+id/tutor_unit"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:maxLines="1"
-                        android:text="@string/hoursUnitString"
                         android:textColor="@color/colorSubTitle"
                         android:textSize="@dimen/tv_14sp" />
 
@@ -135,9 +136,9 @@
                         android:textSize="@dimen/tv_14sp" />
 
                     <TextView
+                        android:id="@+id/tutor_major"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eg12"
                         android:textColor="@color/colorMain"
                         android:textSize="@dimen/tv_14sp" />
 
@@ -159,9 +160,9 @@
                         android:textSize="@dimen/tv_14sp" />
 
                     <TextView
+                        android:id="@+id/tutor_grade"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eg13"
                         android:textColor="@color/colorMain"
                         android:textSize="@dimen/tv_14sp" />
 
@@ -181,9 +182,9 @@
                         android:textSize="@dimen/tv_14sp" />
 
                     <TextView
+                        android:id="@+id/tutor_category"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/eg14"
                         android:textColor="@color/colorMain"
                         android:textSize="@dimen/tv_14sp" />
 
@@ -218,7 +219,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
                     android:layout_marginTop="5dp"
-                    android:text="@string/eg15"
                     android:textColor="@color/colorSubTitle"
                     android:textSize="@dimen/tv_14sp" />
 
@@ -302,11 +302,10 @@
                     android:textSize="@dimen/tv_15sp" />
 
                 <TextView
-
+                    android:id="@+id/servire_exp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
-                    android:text="@string/serviceExperienceString"
                     android:textColor="@color/colorMain"
                     android:textSize="@dimen/tv_14sp" />
             </LinearLayout>
@@ -331,10 +330,11 @@
             android:layout_weight="1">
 
             <TextView
+                android:id="@+id/fllow_tv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
-                android:drawableLeft="@mipmap/fllow_grey_icon"
+                android:drawableLeft="@drawable/user_fllow_select"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
                 android:text="@string/followString"
@@ -343,6 +343,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/subscribeTv"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"

@@ -30,16 +30,16 @@
             android:layout_height="wrap_content">
 
             <TextView
+                android:id="@+id/eva_name"
                 android:textSize="@dimen/tv_14sp"
                 android:textColor="@color/colorMain"
-                android:text="@string/eg5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/eva_content"
                 android:layout_marginTop="5dp"
                 android:textSize="@dimen/tv_14sp"
                 android:textColor="@color/colorSubTitle"
-                android:text="@string/eg5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -62,6 +62,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
             <TextView
+                android:id="@+id/eva_score"
                 android:textSize="@dimen/tv_14sp"
                 app:layout_constraintLeft_toLeftOf="@id/textView"
                 app:layout_constraintRight_toRightOf="@id/textView"
@@ -80,10 +81,10 @@
 
     </LinearLayout>
     <TextView
+        android:id="@+id/eva_time"
         android:layout_marginTop="10dp"
         android:textSize="@dimen/tv_14sp"
         android:textColor="@color/colorSubTitle"
-        android:text="@string/eg16"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" />
 

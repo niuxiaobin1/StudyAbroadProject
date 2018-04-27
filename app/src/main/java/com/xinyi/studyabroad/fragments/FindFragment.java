@@ -12,12 +12,26 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.adapter.FindAdapter;
 import com.xinyi.studyabroad.base.BaseFragment;
+import com.xinyi.studyabroad.callBack.DialogCallBack;
+import com.xinyi.studyabroad.callBack.HandleResponse;
+import com.xinyi.studyabroad.constants.AppUrls;
 import com.xinyi.studyabroad.utils.DensityUtil;
 import com.xinyi.studyabroad.utils.DividerDecoration;
+import com.xinyi.studyabroad.utils.DoParams;
+import com.xinyi.studyabroad.utils.JsonUtils;
 import com.xinyi.studyabroad.utils.StatusBarUtil;
+import com.xinyi.studyabroad.utils.UIHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -46,6 +60,7 @@ public class FindFragment extends BaseFragment {
     @BindView(R.id.recylerView)
     RecyclerView recylerView;
 
+    private FindAdapter adapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -105,16 +120,55 @@ public class FindFragment extends BaseFragment {
         title_tv.setText(R.string.footer_findString);
         parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
 
-        recylerView.setLayoutManager(new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false));
-        recylerView.addItemDecoration(new DividerDecoration(getActivity(),R.color.colorWhite,
-                DensityUtil.dip2px(getActivity(),10)));
-        recylerView.setAdapter(new FindAdapter());
+        recylerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recylerView.addItemDecoration(new DividerDecoration(getActivity(), R.color.colorWhite,
+                DensityUtil.dip2px(getActivity(), 10)));
+        adapter = new FindAdapter(getActivity());
+        recylerView.setAdapter(adapter);
 
     }
 
     @Override
     public void initDatas() {
 
+        HttpParams params = new HttpParams();
+        OkGo.<String>post(AppUrls.NewsListUrl)
+                .cacheMode(CacheMode.NO_CACHE)
+                .tag(this)
+                .params(DoParams.encryptionparams(getActivity(), params, ""))
+                .execute(new DialogCallBack(getActivity(), false) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            JSONObject js = new JSONObject(response.body());
+
+                            if (js.getBoolean("result")) {
+                                JSONArray data = js.getJSONArray("data");
+                                adapter.addDatas(JsonUtils.ArrayToList(data,
+                                        new String[]{
+                                                "id", "name", "description", "image"
+                                        }));
+                            } else {
+                                UIHelper.toastMsg(js.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            UIHelper.toastMsg(e.getMessage());
+                        }
+                    }
+
+
+                    @Override
+                    public String convertResponse(okhttp3.Response response) throws Throwable {
+                        HandleResponse.handleReponse(response);
+                        return super.convertResponse(response);
+                    }
+
+                    @Override
+                    public void onError(com.lzy.okgo.model.Response<String> response) {
+                        super.onError(response);
+                        HandleResponse.handleException(response, getActivity());
+                    }
+                });
     }
 
     // TODO: Rename method, update argument and hook method into UI event

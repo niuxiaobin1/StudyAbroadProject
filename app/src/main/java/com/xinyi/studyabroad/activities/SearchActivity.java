@@ -112,6 +112,14 @@ public class SearchActivity extends BaseActivity {
 
             }
         });
+
+        adapter.setOnItemSelectedListener(new RecordAdapter.OnItemSelectedListener() {
+            @Override
+            public void onSelect(String title) {
+                input_et.setText(title);
+                doSearch(title);
+            }
+        });
         //全部清除
         clearAllTv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,10 +131,10 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 2; i++) {
             View v = LayoutInflater.from(this).inflate(R.layout.flow_item, null);
             TextView tv = v.findViewById(R.id.content);
-            tv.setText("纽约校区" + i * 100);
+            tv.setText("纽约校区");
             flowLayout.addView(v);
         }
 
@@ -145,6 +153,9 @@ public class SearchActivity extends BaseActivity {
      */
     private void doSearch(String key) {
         insertDb(key);
+        Intent it = new Intent(SearchActivity.this, TutorListActivity.class);
+        it.putExtra(TutorListActivity.SEARCH_KEY, key);
+        startActivity(it);
     }
 
 
@@ -176,6 +187,8 @@ public class SearchActivity extends BaseActivity {
     }
 
     private boolean checkIsExitRecord(String keyString) {
+
+        queryDb();
         for (int i = 0; i < recordList.size(); i++) {
             if (keyString.equals(recordList.get(i).get("title"))) {
                 return true;
@@ -214,8 +227,10 @@ public class SearchActivity extends BaseActivity {
 
         if (recordList.size() == 0) {
             //TODO：
+            clearAllTv.setVisibility(View.INVISIBLE);
         } else {
             //TODO：
+            clearAllTv.setVisibility(View.VISIBLE);
         }
         datasize = recordList.size();
         adapter.setData(recordList);

@@ -12,5 +12,13 @@ public class AppUrls {
     public static final String EmailRegisterUrl = HostAddress + "customer/email_register";
     public static final String TelephoneRegisterUrl = HostAddress + "customer/telephone_register";
     public static final String LoginUrl = HostAddress + "customer/login";
+    public static final String UseInfoUrl = HostAddress + "customer/user_info";
+    public static final String TeacherInfoUrl = HostAddress + "customer/teacher_info";
+    public static final String NewsListUrl = HostAddress + "news/lists";
+    public static final String NewsDetailUrl = HostAddress + "news/detail";
+    public static final String CusomerSearchUrl = HostAddress + "customer/search";
+    public static final String CusomerRemoveFavoriteUrl = HostAddress + "customer/removeFavorite";
+    public static final String CusomerAddFavoriteUrl = HostAddress + "customer/addFavorite";
+    public static final String ServiceDetailUrl = HostAddress + "service/detail";
 
 }

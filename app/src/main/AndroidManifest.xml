@@ -40,7 +40,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".activities.SearchActivity" />
-        <activity android:name=".activities.TutorDetailActivity"></activity>
+        <activity android:name=".activities.TutorDetailActivity" />
+        <activity android:name=".activities.FindDetailActivity" />
+        <activity android:name=".activities.TutorListActivity" />
+        <activity android:name=".activities.PersonSettingsActivity" />
+        <activity android:name=".activities.SubScribeActivity"></activity>
     </application>
 
 </manifest>

@@ -17,6 +17,7 @@
         <include layout="@layout/back_title_bar" />
 
         <LinearLayout
+            android:id="@+id/userInfoLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
@@ -34,6 +35,7 @@
                 android:src="@mipmap/banner_e" />
 
             <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -43,16 +45,16 @@
                     android:id="@+id/topTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/eg1"
+                    android:text="@string/clickLoginString"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/tv_15sp" />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/bottomTextView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:text="@string/eg2"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/tv_12sp" />
 

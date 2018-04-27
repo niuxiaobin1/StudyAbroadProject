@@ -3,6 +3,7 @@ package com.xinyi.studyabroad.activities;
 import android.content.Intent;
 import android.graphics.Paint;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,7 @@ import com.xinyi.studyabroad.base.BaseActivity;
 import com.xinyi.studyabroad.callBack.DialogCallBack;
 import com.xinyi.studyabroad.callBack.HandleResponse;
 import com.xinyi.studyabroad.constants.AppUrls;
+import com.xinyi.studyabroad.constants.Configer;
 import com.xinyi.studyabroad.utils.DoParams;
 import com.xinyi.studyabroad.utils.SpUtils;
 import com.xinyi.studyabroad.utils.UIHelper;
@@ -45,6 +47,8 @@ public class LoginActivity extends BaseActivity {
     @BindView(R.id.login_btn)
     Button login_btn;
 
+    private LocalBroadcastManager localBroadcastManager;//本地广播manager
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +62,7 @@ public class LoginActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
         resigt_textview.getPaint().setFlags(Paint.UNDERLINE_TEXT_FLAG); //下划线
 
         resigt_textview.setOnClickListener(new View.OnClickListener() {
@@ -107,8 +112,7 @@ public class LoginActivity extends BaseActivity {
 
                             if (js.getBoolean("result")) {
                                 savaUserInfo(js.getJSONObject("data"));
-                                Intent it = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(it);
+                                senLocalBroadCast();
                                 finish();
                             }
                             UIHelper.toastMsg(js.getString("message"));
@@ -165,6 +169,12 @@ public class LoginActivity extends BaseActivity {
         SpUtils.put(this, SpUtils.USEIMAGE, jsonObject.getString("image"));
         SpUtils.put(this, SpUtils.USECARD_IMAGE, jsonObject.getString("card_image"));
 
+    }
+
+    private void senLocalBroadCast() {
+        Intent intent = new Intent();
+        intent.setAction(Configer.LOCAL_USERLOGIN_ACTION);
+        localBroadcastManager.sendBroadcast(intent);
     }
 
     @Override

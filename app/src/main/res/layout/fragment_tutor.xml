@@ -24,6 +24,7 @@
             android:visibility="gone" />
 
         <RelativeLayout
+            android:id="@+id/search_layout"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_weight="1"
