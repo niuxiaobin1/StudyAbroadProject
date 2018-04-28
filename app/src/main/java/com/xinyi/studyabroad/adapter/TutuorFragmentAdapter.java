@@ -12,6 +12,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.activities.TutorDetailActivity;
+import com.xinyi.studyabroad.activities.TutorListActivity;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -43,7 +44,7 @@ public class TutuorFragmentAdapter extends BaseAdapter<TutuorFragmentAdapter.Vie
         if (datas.size() == 0) {
             return;
         }
-        Map<String, String> map = datas.get(position);
+        final Map<String, String> map = datas.get(position);
         Glide.with(context).load(map.get("image")).into(holder.imageView);
         holder.tutor_name.setText(map.get("true_name"));
         holder.tutor_workInfo.setText(map.get("school_name"));
@@ -56,6 +57,7 @@ public class TutuorFragmentAdapter extends BaseAdapter<TutuorFragmentAdapter.Vie
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(context, TutorDetailActivity.class);
+                it.putExtra(TutorDetailActivity.TEACHER_USER_TOKEN,map.get("user_token"));
                 context.startActivity(it);
             }
         });

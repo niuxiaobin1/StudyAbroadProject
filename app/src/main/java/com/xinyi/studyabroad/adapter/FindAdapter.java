@@ -55,7 +55,7 @@ public class FindAdapter extends BaseAdapter<FindAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 Intent it = new Intent(context, FindDetailActivity.class);
-                it.putExtra(FindDetailActivity.NEWS_ID, map.get("id"));
+//                it.putExtra(FindDetailActivity.NEWS_ID, map.get("id"));
                 context.startActivity(it);
             }
         });
