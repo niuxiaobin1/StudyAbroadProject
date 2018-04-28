@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Study Abroad</string>
+    <string name="app_name">留学汇</string>
     <string name="footer_academyString">院校</string>
     <string name="footer_tutorString">导师</string>
     <string name="footer_findString">发现</string>
@@ -102,6 +102,24 @@
     <string name="consulationString">咨询内容</string>
     <string name="ensureScribeString">确认预约</string>
     <string name="totalString">合计：</string>
+    <string name="sureString">确认</string>
+    <string name="minuteString">分钟</string>
+    <string name="slotTimeEmptyString">请先选择开始时间</string>
+    <string name="askContentEmptyString">请先输入咨询内容</string>
+    <string name="orderListTitleString">预约管理</string>
+    <string name="editorString">编辑</string>
+    <string name="orderNumString">订单号：</string>
+    <string name="scribeTimeString">预约时间：</string>
+    <string name="totlaString">共计</string>
+    <string name="totlaPriceString">总计支付：</string>
+    <string name="cancleOrderString">取消预约</string>
+    <string name="goPayString">去支付</string>
+    <string name="receptString">接单</string>
+    <string name="LaunchVideoString">发起视频</string>
+    <string name="finishServiceString">结束服务</string>
+    <string name="toEvaluateString">去评价</string>
+    <string name="complaintString">投诉</string>
+    <string name="deleteString">删除订单</string>
 
 
     <string name="eg1">常青藤学校</string>

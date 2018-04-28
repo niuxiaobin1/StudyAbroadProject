@@ -103,9 +103,9 @@ public class SearchActivity extends BaseActivity {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     String key = input_et.getText().toString().trim();
-                    if (!TextUtils.isEmpty(key)) {
-                        doSearch(key);
-                    }
+
+                    doSearch(key);
+
                     return true;
                 }
                 return false;
@@ -152,7 +152,9 @@ public class SearchActivity extends BaseActivity {
      * @param key
      */
     private void doSearch(String key) {
-        insertDb(key);
+        if (!TextUtils.isEmpty(key)) {
+            insertDb(key);
+        }
         Intent it = new Intent(SearchActivity.this, TutorListActivity.class);
         it.putExtra(TutorListActivity.SEARCH_KEY, key);
         startActivity(it);

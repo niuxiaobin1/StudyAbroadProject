@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_vertical"
+    android:orientation="horizontal"
+    android:paddingBottom="10dp"
+    android:paddingTop="10dp">
+
+    <ImageView
+        android:id="@+id/pay_image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:scaleType="centerCrop"
+        android:src="@mipmap/banner_e" />
+
+    <TextView
+        android:id="@+id/pay_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_weight="1"
+        android:textColor="@color/colorMain"
+        android:textSize="@dimen/tv_14sp" />
+
+    <TextView
+        android:id="@+id/falg_tv"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:background="@drawable/paymethod_selector" />
+
+</LinearLayout>

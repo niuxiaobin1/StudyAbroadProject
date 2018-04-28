@@ -12,7 +12,7 @@ import java.util.Map;
  * Created by Niu on 2018/4/27.
  */
 
-public class BaseAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
+public abstract class BaseAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView.Adapter<T> {
 
 
     protected List<Map<String, String>> datas;
@@ -31,18 +31,4 @@ public class BaseAdapter<T extends RecyclerView.ViewHolder> extends RecyclerView
         notifyDataSetChanged();
     }
 
-    @Override
-    public T onCreateViewHolder(ViewGroup parent, int viewType) {
-        return null;
-    }
-
-    @Override
-    public void onBindViewHolder(T holder, int position) {
-
-    }
-
-    @Override
-    public int getItemCount() {
-        return 0;
-    }
 }

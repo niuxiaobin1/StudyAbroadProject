@@ -33,7 +33,15 @@ import okhttp3.OkHttpClient;
 
 public class StudyAbroadApp extends Application {
 
+    public Locale getAppLocal() {
+        return appLocal;
+    }
 
+    public void setAppLocal(Locale appLocal) {
+        this.appLocal = appLocal;
+    }
+
+    private Locale appLocal;//当前程序使用的语言
     private Timer timer;//整个app的倒计时
     private boolean isCountDowning;//true：timer运行中，false:timer==null
     private String tel;
@@ -48,6 +56,7 @@ public class StudyAbroadApp extends Application {
     public void onCreate() {
         super.onCreate();
         initOkGo();
+        initLanguage();
         localBroadcastManager = LocalBroadcastManager.getInstance(this);
         weakHandler = new WeakHandler(new Handler.Callback() {
             @Override
@@ -70,6 +79,15 @@ public class StudyAbroadApp extends Application {
         });
     }
 
+
+    private void initLanguage() {
+        Locale phoneLocal = CommonUtils.getCurrentLocale(getApplicationContext());
+        appLocal = CommonUtils.getUserLocale(getApplicationContext());
+        if (appLocal == null) {
+            appLocal = phoneLocal;
+        } else {
+        }
+    }
 
     /**
      * init Okgo

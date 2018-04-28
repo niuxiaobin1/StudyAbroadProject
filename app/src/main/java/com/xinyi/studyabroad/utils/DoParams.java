@@ -1,11 +1,13 @@
 package com.xinyi.studyabroad.utils;
 
+import android.app.Activity;
 import android.content.Context;
 import android.text.TextUtils;
 import android.util.Log;
 import android.widget.TextView;
 
 import com.lzy.okgo.model.HttpParams;
+import com.xinyi.studyabroad.base.StudyAbroadApp;
 
 import java.util.Locale;
 
@@ -20,29 +22,12 @@ public class DoParams {
         String time = String.valueOf(System.currentTimeMillis() / 1000);
         String salt = "fjsadhfkjashfhwruefhijoishfeu";
         httpParams.put("t", time);
-
-        Locale phoneLocal = CommonUtils.getCurrentLocale(context);
-        Locale appLocal = CommonUtils.getUserLocale(context);
-        if (appLocal == null) {
-            if (!phoneLocal.getLanguage().equals("zh")) {
-                httpParams.put("lan", "1");
-
-            } else {
-                httpParams.put("lan", "0");
-
-            }
-
+        Activity activity = (Activity) context;
+        if (!((StudyAbroadApp) activity.getApplication()).getAppLocal().getLanguage().equals("zh")) {
+            httpParams.put("lan", "1");
         } else {
-            if (!appLocal.getLanguage().equals("zh")) {
-                httpParams.put("lan", "1");
-
-            } else {
-                httpParams.put("lan", "0");
-
-            }
+            httpParams.put("lan", "0");
         }
-
-
         if (TextUtils.isEmpty(user_token)) {
             user_token = salt + time;
         } else {

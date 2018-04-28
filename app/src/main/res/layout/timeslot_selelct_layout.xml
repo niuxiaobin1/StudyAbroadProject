@@ -1,34 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:gravity="center_vertical"
-    android:orientation="horizontal"
-    android:padding="10dp">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:background="@drawable/white_color_bg"
+        android:id="@+id/menuLayout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/timeslotString"
-        android:textColor="@color/colorMain"
-        android:textSize="@dimen/tv_14sp" />
+        android:orientation="vertical"
+        android:padding="10dp">
 
-    <com.contrarywind.view.WheelView
-        android:id="@+id/minutes_wheelView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/timeStartString"
-        android:textColor="@color/colorMain"
-        android:textSize="@dimen/tv_14sp" />
+            <TextView
+                android:id="@+id/cancle_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cancleString"
+                android:textColor="@color/colorSubTitle"
+                android:textSize="@dimen/tv_15sp" />
 
-    <com.contrarywind.view.WheelView
-        android:id="@+id/timePoint_wheelView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/sure_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="@string/sureString"
+                android:textColor="@color/colorBlueColor"
+                android:textSize="@dimen/tv_15sp" />
 
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeslotString"
+                android:textColor="@color/colorMain"
+                android:textSize="@dimen/tv_14sp" />
+
+            <com.contrarywind.view.WheelView
+                android:id="@+id/minutes_wheelView"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/timeStartString"
+                android:textColor="@color/colorMain"
+                android:textSize="@dimen/tv_14sp" />
+
+            <com.contrarywind.view.WheelView
+                android:id="@+id/timePoint_wheelView"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>

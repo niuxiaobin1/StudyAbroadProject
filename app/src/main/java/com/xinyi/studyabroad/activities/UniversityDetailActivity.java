@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,6 +46,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -70,6 +72,9 @@ public class UniversityDetailActivity extends BaseActivity {
 
     @BindView(R.id.tabLayout)
     TabLayout tabLayout;
+
+    @BindView(R.id.tab_layout)
+    RelativeLayout tab_layout;
 
     @BindView(R.id.appbar)
     AppBarLayout appbar;//外层appbar
@@ -265,7 +270,6 @@ public class UniversityDetailActivity extends BaseActivity {
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
 
                 verticalOffset = Math.abs(verticalOffset);
-
                 if (verticalOffset > fadingHeight) {
                     verticalOffset = fadingHeight;   //当滑动到指定位置之后设置颜色为纯色，之前的话要渐变---实现下面的公式即可
 
@@ -281,12 +285,12 @@ public class UniversityDetailActivity extends BaseActivity {
             }
         });
 
-
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
-                isTouchScroll = false;
+                if (isTouchScroll) {
+                    return;
+                }
                 for (int i = 0; i < titles.length; i++) {
                     if (titles[i].equals(tab.getText())) {
                         doScroll(i);
@@ -336,6 +340,7 @@ public class UniversityDetailActivity extends BaseActivity {
         for (int i = 0; i < titles.length; i++) {
             tabLayout.addTab(tabLayout.newTab().setText(titles[i]));
         }
+        initTabClick();
     }
 
     @Override
@@ -378,6 +383,7 @@ public class UniversityDetailActivity extends BaseActivity {
                                     map.put("image", jsonObject.getString("image"));
                                     map.put("school_name", jsonObject.getString("school_name"));
                                     map.put("professional_name", jsonObject.getString("professional_name"));
+                                    map.put("user_token", jsonObject.getString("user_token"));
                                     tutors.add(map);
                                 }
                                 tutor_recylerView.setAdapter(new TutorAdapter(UniversityDetailActivity.this, tutors));
@@ -539,8 +545,7 @@ public class UniversityDetailActivity extends BaseActivity {
      * @param index
      */
     private void doScroll(int index) {
-
-        appbar.setExpanded(false, true);
+        appbar.setExpanded(false, false);
         int Y1 = academy_introduction_ll.getTop();
         int Y2 = tutorList_ll.getTop();
         int Y3 = score_ll.getTop();
@@ -557,7 +562,6 @@ public class UniversityDetailActivity extends BaseActivity {
         } else {
             scrollView.smoothScrollBy(0, distenceY);
         }
-
     }
 
     /**
@@ -571,12 +575,49 @@ public class UniversityDetailActivity extends BaseActivity {
         int Y3 = score_ll.getTop();
         if (disY < Y2) {
             tabLayout.setScrollPosition(0, 0, true);
+            tabLayout.getTabAt(0).select();
         } else if (disY < Y3) {
             tabLayout.setScrollPosition(1, 0, true);
-
+            tabLayout.getTabAt(1).select();
         } else {
             tabLayout.setScrollPosition(2, 0, true);
+            tabLayout.getTabAt(2).select();
+        }
+    }
 
+
+    private void initTabClick() {
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            if (tab == null) return;
+            //这里使用到反射，拿到Tab对象后获取Class
+            Class c = tab.getClass();
+            try {
+                //Filed “字段、属性”的意思,c.getDeclaredField 获取私有属性。
+                //"mView"是Tab的私有属性名称(可查看TabLayout源码),类型是 TabView,TabLayout私有内部类。
+                Field field = c.getDeclaredField("mView");
+                //值为 true 则指示反射的对象在使用时应该取消 Java 语言访问检查。值为 false 则指示反射的对象应该实施 Java 语言访问检查。
+                //如果不这样会报如下错误
+                // java.lang.IllegalAccessException:
+                //Class com.test.accessible.Main
+                //can not access
+                //a member of class com.test.accessible.AccessibleTest
+                //with modifiers "private"
+                field.setAccessible(true);
+                final View view = (View) field.get(tab);
+                if (view == null) return;
+                view.setTag(i);
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        int position = (int) view.getTag();
+                        //这里就可以根据业务需求处理点击事件了。
+                        isTouchScroll = false;
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

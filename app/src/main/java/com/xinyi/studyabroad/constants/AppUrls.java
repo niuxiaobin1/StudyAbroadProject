@@ -20,5 +20,8 @@ public class AppUrls {
     public static final String CusomerRemoveFavoriteUrl = HostAddress + "customer/removeFavorite";
     public static final String CusomerAddFavoriteUrl = HostAddress + "customer/addFavorite";
     public static final String ServiceDetailUrl = HostAddress + "service/detail";
+    public static final String OrderConfirmUrl = HostAddress + "order/confirm";
+    public static final String OrderPayUrl = HostAddress + "order/pay";
+    public static final String OrderSearchUrl = HostAddress + "order/search";
 
 }

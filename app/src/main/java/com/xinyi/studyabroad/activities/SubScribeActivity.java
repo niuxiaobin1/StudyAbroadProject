@@ -1,9 +1,14 @@
 package com.xinyi.studyabroad.activities;
 
+import android.content.Intent;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +18,7 @@ import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 
@@ -22,16 +28,20 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.adapter.PayMethdoAdapter;
 import com.xinyi.studyabroad.adapter.TutorAdapter;
 import com.xinyi.studyabroad.base.BaseActivity;
 import com.xinyi.studyabroad.callBack.DialogCallBack;
 import com.xinyi.studyabroad.callBack.HandleResponse;
 import com.xinyi.studyabroad.constants.AppUrls;
 import com.xinyi.studyabroad.utils.CommonUtils;
+import com.xinyi.studyabroad.utils.DensityUtil;
+import com.xinyi.studyabroad.utils.DividerDecoration;
 import com.xinyi.studyabroad.utils.DoParams;
 import com.xinyi.studyabroad.utils.JsonUtils;
 import com.xinyi.studyabroad.utils.SpUtils;
 import com.xinyi.studyabroad.utils.UIHelper;
+import com.xinyi.studyabroad.weight.TimeSotPopupWindow;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -48,12 +58,17 @@ import java.util.Map;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SubScribeActivity extends BaseActivity {
+public class SubScribeActivity extends BaseActivity implements View.OnClickListener {
     public static final String USER_TOKEN = "teacher_user_token";
     private static final int TYPE_DATE = 0;
     private static final int TYPE_TIME = 1;
+    private static final int MIN_TIME = 30;//最短选择时长
+    private static final int MIN_PER_TIME = 10;//最小增加时长
     private String teacher_user_token = "";
 
+
+    @BindView(R.id.parentView)
+    LinearLayout parentView;
     //导师信息
     @BindView(R.id.imageView)
     ImageView imageView;
@@ -74,12 +89,20 @@ public class SubScribeActivity extends BaseActivity {
     GridView date_grid;
     @BindView(R.id.time_grid)
     GridView time_grid;
+    @BindView(R.id.time_select)
+    TextView time_select;
     //确认预约
     @BindView(R.id.subscribe_commitTv)
     TextView subscribe_commitTv;
     //咨询内容
     @BindView(R.id.consulation_et)
     EditText consulation_et;
+    //支付方式
+    @BindView(R.id.payMethod_recylerView)
+    RecyclerView payMethod_recylerView;
+    //总价
+    @BindView(R.id.totlaPriceTv)
+    TextView totlaPriceTv;
 
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
     private SimpleDateFormat dayFormat = new SimpleDateFormat("MM.dd");
@@ -93,6 +116,13 @@ public class SubScribeActivity extends BaseActivity {
     private List<Map<String, String>> servicetime;
     private DateTimeAdapter dateAdapter;
     private DateTimeAdapter timeAdapter;
+
+    private String perHourPrice = "";//单价
+    private String priceUnit = "$";
+    private String totlaPrice = "0";//总价
+    private String slotTime = "";//时长
+    private String service_start_time = "";
+    private PayMethdoAdapter payMethdoAdapter;
 
 
     @Override
@@ -151,8 +181,17 @@ public class SubScribeActivity extends BaseActivity {
         subscribe_commitTv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.e("nxb",dateAdapter.getSelectString());
-                Log.e("nxb",timeAdapter.getSelectString());
+                if (TextUtils.isEmpty(slotTime)) {
+                    showToast(R.string.slotTimeEmptyString);
+                    return;
+                }
+                if (TextUtils.isEmpty(consulation_et.getText().toString().trim())) {
+                    showToast(R.string.askContentEmptyString);
+                    return;
+                }
+                Map<String, String> payMap = payMethdoAdapter.getPayMethod();
+                BalancePay(payMap);
+
             }
         });
         //咨询
@@ -162,6 +201,19 @@ public class SubScribeActivity extends BaseActivity {
                 UIHelper.showInputMethod(consulation_et);
             }
         });
+
+        time_select.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showTimMinutesPopupWindow();
+            }
+        });
+
+        payMethdoAdapter = new PayMethdoAdapter(this);
+        payMethod_recylerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        payMethod_recylerView.addItemDecoration(new DividerDecoration(this, R.color.colorLine, DensityUtil
+                .dip2px(this, 1)));
+        payMethod_recylerView.setAdapter(payMethdoAdapter);
     }
 
     @Override
@@ -179,7 +231,6 @@ public class SubScribeActivity extends BaseActivity {
         } catch (ParseException e) {
             UIHelper.toastMsg(e.getMessage());
         }
-        super.initDatas();
         OkGo.<String>post(AppUrls.ServiceDetailUrl)
                 .cacheMode(CacheMode.NO_CACHE)
                 .params(DoParams.encryptionparams(this, params, user_token))
@@ -200,6 +251,9 @@ public class SubScribeActivity extends BaseActivity {
                                 tutor_serviceInfo.setText(teacher_info.getString("service_name"));
                                 tutor_price.setText(teacher_info.getString("money_sign") + teacher_info.getString("service_price"));
                                 tutor_unit.setText("/" + teacher_info.getString("charge_unit"));
+
+                                perHourPrice = teacher_info.getString("service_price");
+                                priceUnit = teacher_info.getString("money_sign");
                                 //服务日期
                                 serviceDate.clear();
                                 JSONArray service_date = data.getJSONArray("service_date");
@@ -212,6 +266,12 @@ public class SubScribeActivity extends BaseActivity {
                                         "service_end_time", "order_flag", "length_time"});
                                 dateAdapter.notifyDataSetChanged();
                                 timeAdapter.notifyDataSetChanged();
+                                //支付方式
+                                payMethdoAdapter.addDatas(JsonUtils.ArrayToList(
+                                        data.getJSONArray("payment_list"), new String[]{
+                                                "name", "image", "pfn"
+                                        }
+                                ));
                             } else {
                                 UIHelper.toastMsg(result.getString("message"));
                             }
@@ -237,10 +297,23 @@ public class SubScribeActivity extends BaseActivity {
 
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.sure_tv:
+                mPopupWindow.dismiss();
+                caculatorPrice(Integer.parseInt(mPopupWindow.getResult()[0]));
+                time_select.setText(timeFormat.format(new Date(Long.parseLong(mPopupWindow.getResult()[1]) * 1000))
+                        + "(" + mPopupWindow.getResult()[0]
+                        + getResources().getString(R.string.minuteString) + ")");
+                service_start_time = mPopupWindow.getResult()[1];
+
+                break;
+        }
+    }
+
 
     private class DateTimeAdapter extends BaseAdapter {
-
-
         private int type;
 
         public String getSelectString() {
@@ -327,12 +400,155 @@ public class SubScribeActivity extends BaseActivity {
         }
     }
 
-    private PopupWindow mPopupWindow;
+    private TimeSotPopupWindow mPopupWindow;
 
-    private void showTimMinutesPopupWindow(){
-
+    private void showTimMinutesPopupWindow() {
+        if (mPopupWindow != null) {
+            mPopupWindow = null;
+        }
+        mPopupWindow = new TimeSotPopupWindow(this, this);
+        initTimeSlotData();
+        mPopupWindow.showAtLocation(parentView, Gravity.BOTTOM, 0, 0);
 
     }
 
+    /**
+     * 计算时间数据
+     */
+    private void initTimeSlotData() {
+        if (servicetime.size() == 0) {
+            return;
+        }
+        Map<String, String> selectMap = servicetime.get(timeSelectPostion);
+        String maxTime = selectMap.get("length_time");//单位分钟
 
+        int count = (Integer.parseInt(maxTime) - MIN_TIME) / MIN_PER_TIME;
+        List<String> timeSlot = new ArrayList<>();
+        for (int i = 0; i < count + 1; i++) {
+            timeSlot.add(String.valueOf(MIN_TIME + MIN_PER_TIME * i));
+        }
+        mPopupWindow.setDatas(timeSlot, selectMap.get("service_start_time"), selectMap.get("service_end_time"));
+    }
+
+    /**
+     * 计算总价
+     *
+     * @param minutes
+     */
+    private void caculatorPrice(int minutes) {
+        slotTime = String.valueOf(minutes);
+        totlaPrice = String.format("%.2f", Double.parseDouble(perHourPrice) / 60 * minutes);
+        totlaPriceTv.setText(priceUnit + totlaPrice);
+    }
+
+    /**
+     * 生成订单
+     */
+    private void BalancePay(final Map<String, String> payMap) {
+        String user_token = (String) SpUtils.get(this, SpUtils.USERUSER_TOKEN, "");
+        HttpParams params = new HttpParams();
+        params.put("user_token", user_token);
+        params.put("teacher_user_token", teacher_user_token);
+        params.put("service_date", dateAdapter.getSelectString());
+        params.put("service_start_time", service_start_time);
+        long endTime = Long.parseLong(service_start_time) + Integer.parseInt(slotTime) * 60;
+        params.put("service_end_time", String.valueOf(endTime));
+        params.put("length_time", slotTime);
+        params.put("ask_content", consulation_et.getText().toString().trim());
+        params.put("payment_method", payMap.get("name"));
+        params.put("payment_pfn", payMap.get("pfn"));
+
+        OkGo.<String>post(AppUrls.OrderConfirmUrl)
+                .cacheMode(CacheMode.NO_CACHE)
+                .params(DoParams.encryptionparams(this, params, user_token))
+                .tag(this)
+                .execute(new DialogCallBack(SubScribeActivity.this, false) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            JSONObject result = new JSONObject(response.body());
+                            if (result.getBoolean("result")) {
+
+                                if (payMap.get("pfn").equals("Balances")) {
+                                    //余额
+                                    balancePay(result.getJSONObject("data"));
+                                } else if (payMap.get("pfn").equals("WeChatPay")) {
+                                    //微信
+
+                                } else if (payMap.get("pfn").equals("Alipay")) {
+                                    //支付宝
+                                }
+                            } else {
+                                UIHelper.toastMsg(result.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            UIHelper.toastMsg(e.getMessage());
+                        }
+
+                    }
+
+                    @Override
+                    public String convertResponse(okhttp3.Response response) throws Throwable {
+                        HandleResponse.handleReponse(response);
+                        return super.convertResponse(response);
+                    }
+
+
+                    @Override
+                    public void onError(com.lzy.okgo.model.Response<String> response) {
+                        super.onError(response);
+                        HandleResponse.handleException(response, SubScribeActivity.this);
+                    }
+                });
+    }
+
+    /**
+     * 余额支付
+     *
+     * @param js
+     * @throws JSONException
+     */
+    private void balancePay(JSONObject js) throws JSONException {
+        String user_token = (String) SpUtils.get(this, SpUtils.USERUSER_TOKEN, "");
+        HttpParams params = new HttpParams();
+        params.put("user_token", user_token);
+        params.put("order_code", js.getString("order_code"));
+        OkGo.<String>post(AppUrls.OrderPayUrl)
+                .cacheMode(CacheMode.NO_CACHE)
+                .params(DoParams.encryptionparams(this, params, user_token))
+                .tag(this)
+                .execute(new DialogCallBack(SubScribeActivity.this, true) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            JSONObject result = new JSONObject(response.body());
+                            if (result.getBoolean("result")) {
+                                Intent it = new Intent(SubScribeActivity.this, OrderManagerActivity.class);
+                                startActivity(it);
+                                finish();
+                            } else {
+                                UIHelper.toastMsg(result.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            UIHelper.toastMsg(e.getMessage());
+                        }
+
+                    }
+
+                    @Override
+                    public String convertResponse(okhttp3.Response response) throws Throwable {
+                        HandleResponse.handleReponse(response);
+                        return super.convertResponse(response);
+                    }
+
+
+                    @Override
+                    public void onError(com.lzy.okgo.model.Response<String> response) {
+                        super.onError(response);
+                        HandleResponse.handleException(response, SubScribeActivity.this);
+                    }
+                });
+    }
 }

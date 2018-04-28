@@ -140,9 +140,9 @@ public class AcademyFragment extends BaseFragment {
      */
     private void initContent() {
         innersFragments.add(InnerFragment.newInstance("", ""));
-        innersFragments.add(InnerAreaFragment.newInstance("", ""));
-        innersFragments.add(InnerAreaFragment.newInstance("", ""));
-        innersFragments.add(InnerAreaFragment.newInstance("", ""));
+//        innersFragments.add(InnerAreaFragment.newInstance("", ""));
+//        innersFragments.add(InnerAreaFragment.newInstance("", ""));
+//        innersFragments.add(InnerAreaFragment.newInstance("", ""));
 
         innerPageAdapter = new InnerPageAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(innerPageAdapter);

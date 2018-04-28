@@ -3,6 +3,7 @@ package com.xinyi.studyabroad.activities;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -13,6 +14,7 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.base.BaseActivity;
+import com.xinyi.studyabroad.base.StudyAbroadApp;
 import com.xinyi.studyabroad.callBack.DialogCallBack;
 import com.xinyi.studyabroad.callBack.HandleResponse;
 import com.xinyi.studyabroad.constants.AppUrls;
@@ -64,28 +66,18 @@ public class FindDetailActivity extends BaseActivity {
         }
 
         String lan = "0";
-        Locale phoneLocal = CommonUtils.getCurrentLocale(this);
-        Locale appLocal = CommonUtils.getUserLocale(this);
-        if (appLocal == null) {
-            if (!phoneLocal.getLanguage().equals("zh")) {
-                lan = "1";
 
-            } else {
-                lan = "0";
-
-            }
+        if (!((StudyAbroadApp)getApplication()).getAppLocal().getLanguage().equals("zh")) {
+            lan = "1";
 
         } else {
-            if (!appLocal.getLanguage().equals("zh")) {
-                lan = "1";
+            lan = "0";
 
-            } else {
-                lan = "0";
-
-            }
         }
+
         StringBuffer url = new StringBuffer(AppUrls.NewsDetailUrl);
         url.append("?id=" + id).append("&lan=" + lan);
+        Log.e("nxb", url.toString());
         webView.loadUrl(url.toString());
     }
 

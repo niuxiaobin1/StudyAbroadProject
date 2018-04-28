@@ -7,6 +7,7 @@
     android:background="@color/colorWhite"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
+    android:id="@+id/parentView"
     tools:context="com.xinyi.studyabroad.activities.SubScribeActivity">
 
     <include layout="@layout/back_title_bar" />
@@ -100,6 +101,7 @@
                         android:textSize="@dimen/tv_14sp" />
 
                     <TextView
+                        android:id="@+id/time_select"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
@@ -190,10 +192,11 @@
                 android:textColor="@color/colorMain"
                 android:textSize="@dimen/tv_12sp" />
             <TextView
+                android:id="@+id/totlaPriceTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="$100"
+                android:text="$0"
                 android:textColor="@color/colorpinkColor"
                 android:textSize="@dimen/tv_15sp" />
 

@@ -1,9 +1,11 @@
 package com.xinyi.studyabroad.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.view.View;
 import android.widget.TextView;
 
 import com.lzy.okgo.OkGo;
@@ -57,6 +59,14 @@ public class TutorListActivity extends BaseActivity {
         if (!TextUtils.isEmpty(key)) {
             key_tv.setText(key);
         }
+
+        key_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(TutorListActivity.this, SearchActivity.class);
+                startActivity(it);
+            }
+        });
         adapter = new TutuorFragmentAdapter(this);
         recylerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recylerView.addItemDecoration(new DividerDecoration(this, R.color.colorLine,
@@ -82,9 +92,9 @@ public class TutorListActivity extends BaseActivity {
 
                             if (js.getBoolean("result")) {
                                 adapter.addDatas(JsonUtils.ArrayToList(js.getJSONArray("data"),
-                                        new String[]{"school_name","professional_name","true_name","service_name"
-                                ,"service_price","points","user_token","image","money_sign","charge_unit"}));
-                            }else{
+                                        new String[]{"school_name", "professional_name", "true_name", "service_name"
+                                                , "service_price", "points", "user_token", "image", "money_sign", "charge_unit"}));
+                            } else {
                                 UIHelper.toastMsg(js.getString("message"));
                             }
 

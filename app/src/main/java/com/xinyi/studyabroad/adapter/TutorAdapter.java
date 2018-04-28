@@ -1,6 +1,7 @@
 package com.xinyi.studyabroad.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.activities.TutorDetailActivity;
 import com.xinyi.studyabroad.utils.GlideCircleTransform;
 
 import java.util.HashMap;
@@ -41,12 +43,20 @@ public class TutorAdapter extends BaseAdapter<TutorAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Map<String,String> map=datas.get(position);
+       final Map<String,String> map=datas.get(position);
         Glide.with(context).load(map.get("image")).transform(new GlideCircleTransform(context)).into(holder.header);
         holder.tutor_name.setText(map.get("true_name"));
         holder.tutor_academy.setText(map.get("school_name"));
         holder.tutor_major.setText(map.get("professional_name"));
         holder.tutor_score.setText(map.get("points"));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(context, TutorDetailActivity.class);
+                it.putExtra(TutorDetailActivity.TEACHER_USER_TOKEN,map.get("user_token"));
+                context.startActivity(it);
+            }
+        });
     }
 
     @Override

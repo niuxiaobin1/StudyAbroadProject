@@ -26,6 +26,7 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.activities.LoginActivity;
+import com.xinyi.studyabroad.activities.OrderManagerActivity;
 import com.xinyi.studyabroad.activities.PersonSettingsActivity;
 import com.xinyi.studyabroad.base.BaseFragment;
 import com.xinyi.studyabroad.callBack.DialogCallBack;
@@ -172,7 +173,33 @@ public class MineFragment extends BaseFragment {
                 onUserLayoutClick();
             }
         });
+        subscribeLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (isLogin()) {
+                    Intent it = new Intent(getActivity(), OrderManagerActivity.class);
+                    startActivity(it);
+                } else {
+                    toLogin();
+                }
+            }
+        });
+
+    }
+
+    private boolean isLogin() {
+        String user_token = (String) SpUtils.get(getActivity(), SpUtils.USERUSER_TOKEN, "");
+        if (TextUtils.isEmpty(user_token)) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    private void toLogin() {
+        Intent it = new Intent(getActivity(), LoginActivity.class);
+        startActivity(it);
     }
 
     @Override
