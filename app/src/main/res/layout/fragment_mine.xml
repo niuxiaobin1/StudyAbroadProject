@@ -32,7 +32,7 @@
                 android:layout_width="55dp"
                 android:layout_height="55dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/banner_e" />
+                android:src="@mipmap/user_icon" />
 
             <LinearLayout
                 android:gravity="center_vertical"
@@ -83,7 +83,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/banner" />
+                android:src="@mipmap/subscribe_manager_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -113,7 +113,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/banner" />
+                android:src="@mipmap/pay_manager_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -138,7 +138,7 @@
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/banner" />
+                android:src="@mipmap/time_manager_icon" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -178,7 +178,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:drawableLeft="@mipmap/settings_icon"
+                    android:drawableLeft="@mipmap/my_pause_icon"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:text="@string/mypauseString"
@@ -244,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:drawableLeft="@mipmap/settings_icon"
+                    android:drawableLeft="@mipmap/focus_icon"
                     android:drawablePadding="5dp"
                     android:gravity="center_vertical"
                     android:text="@string/myfllowString"
@@ -331,7 +331,38 @@
                     android:layout_alignParentBottom="true"
                     android:background="@color/colorLine" />
             </RelativeLayout>
+            <RelativeLayout
+                android:id="@+id/logoutLayout"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:drawableLeft="@mipmap/settings_icon"
+                    android:drawablePadding="5dp"
+                    android:gravity="center_vertical"
+                    android:text="@string/logoutString"
+                    android:textColor="@color/colorMain"
+                    android:textSize="@dimen/tv_14sp" />
+
+                <ImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@mipmap/arrow_right" />
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_alignParentBottom="true"
+                    android:background="@color/colorLine" />
+            </RelativeLayout>
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

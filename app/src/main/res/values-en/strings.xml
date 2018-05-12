@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">Study Abroad</string>
     <string name="footer_academyString">academy</string>
-    <string name="footer_tutorString">tutor</string>
+    <string name="footer_tutorString">school</string>
+    <string name="footer_schoolString">school</string>
     <string name="footer_findString">find</string>
     <string name="footer_mineString">mine</string>
 

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 
 import com.lzy.okgo.OkGo;
@@ -19,6 +20,7 @@ import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.xinyi.studyabroad.constants.Configer;
 import com.xinyi.studyabroad.third.WeakHandler;
 import com.xinyi.studyabroad.utils.CommonUtils;
+import com.xinyi.studyabroad.utils.SpUtils;
 
 import java.util.Locale;
 import java.util.Timer;
@@ -33,9 +35,27 @@ import okhttp3.OkHttpClient;
 
 public class StudyAbroadApp extends Application {
 
+
+    private String country_id = "0";
+
     public Locale getAppLocal() {
         return appLocal;
     }
+
+    public String getCountry_id() {
+        String spCountryId = (String) SpUtils.get(getApplicationContext(), SpUtils.COUNTRY_ID, "");
+        if (TextUtils.isEmpty(spCountryId)) {
+            return country_id;
+        } else {
+            return spCountryId;
+        }
+    }
+
+    public void setCountry_id(String country_id) {
+        SpUtils.put(getApplicationContext(), SpUtils.COUNTRY_ID, country_id);
+        this.country_id = country_id;
+    }
+
 
     public void setAppLocal(Locale appLocal) {
         this.appLocal = appLocal;

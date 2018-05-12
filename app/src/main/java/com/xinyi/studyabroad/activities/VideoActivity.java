@@ -1,6 +1,7 @@
 package com.xinyi.studyabroad.activities;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -15,8 +16,21 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.base.BaseActivity;
+import com.xinyi.studyabroad.callBack.DialogCallBack;
+import com.xinyi.studyabroad.callBack.HandleResponse;
+import com.xinyi.studyabroad.constants.AppUrls;
+import com.xinyi.studyabroad.utils.DoParams;
+import com.xinyi.studyabroad.utils.SpUtils;
+import com.xinyi.studyabroad.utils.UIHelper;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import io.agora.rtc.Constants;
 import io.agora.rtc.IRtcEngineEventHandler;
@@ -41,6 +55,7 @@ public class VideoActivity extends BaseActivity {
                 @Override
                 public void run() {
                     setupRemoteVideo(uid);
+                    doOrderOperation(ChannelId,"start","");
                 }
             });
         }
@@ -265,5 +280,48 @@ public class VideoActivity extends BaseActivity {
         if (tag != null && (Integer) tag == uid) {
             surfaceView.setVisibility(muted ? View.GONE : View.VISIBLE);
         }
+    }
+
+    private void doOrderOperation( String order_code, final String button_status, String now_time) {
+        String user_token = (String) SpUtils.get(this, SpUtils.USERUSER_TOKEN, "");
+        HttpParams params = new HttpParams();
+        params.put("user_token", user_token);
+        params.put("order_code", order_code);
+        params.put("button_status", button_status);
+        params.put("now_time", now_time);
+        OkGo.<String>post(AppUrls.OrderUpdateUrl)
+                .cacheMode(CacheMode.NO_CACHE)
+                .params(DoParams.encryptionparams(VideoActivity.this, params, user_token))
+                .tag(this)
+                .execute(new DialogCallBack((Activity) VideoActivity.this, true) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            JSONObject result = new JSONObject(response.body());
+                            if (result.getBoolean("result")) {
+
+                            } else {
+                                UIHelper.toastMsg(result.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            UIHelper.toastMsg(e.getMessage());
+                        }
+
+                    }
+
+                    @Override
+                    public String convertResponse(okhttp3.Response response) throws Throwable {
+                        HandleResponse.handleReponse(response);
+                        return super.convertResponse(response);
+                    }
+
+
+                    @Override
+                    public void onError(com.lzy.okgo.model.Response<String> response) {
+                        super.onError(response);
+                        HandleResponse.handleException(response, VideoActivity.this);
+                    }
+                });
     }
 }

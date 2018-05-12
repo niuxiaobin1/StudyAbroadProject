@@ -23,5 +23,8 @@ public class AppUrls {
     public static final String OrderConfirmUrl = HostAddress + "order/confirm";
     public static final String OrderPayUrl = HostAddress + "order/pay";
     public static final String OrderSearchUrl = HostAddress + "order/search";
+    public static final String FrontHomeUrl = HostAddress + "front/home";
+    public static final String SchoolSearchUrl = HostAddress + "school/search";
+    public static final String OrderUpdateUrl = HostAddress + "order/update";
 
 }

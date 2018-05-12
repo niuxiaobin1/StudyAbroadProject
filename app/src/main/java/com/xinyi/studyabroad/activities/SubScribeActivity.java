@@ -216,6 +216,8 @@ public class SubScribeActivity extends BaseActivity implements View.OnClickListe
         payMethod_recylerView.setAdapter(payMethdoAdapter);
     }
 
+
+
     @Override
     protected void initDatas() {
         super.initDatas();

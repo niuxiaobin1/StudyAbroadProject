@@ -14,6 +14,7 @@ import com.xinyi.studyabroad.base.BaseActivity;
 import com.xinyi.studyabroad.fragments.AcademyFragment;
 import com.xinyi.studyabroad.fragments.FindFragment;
 import com.xinyi.studyabroad.fragments.MineFragment;
+import com.xinyi.studyabroad.fragments.SchoolFragment;
 import com.xinyi.studyabroad.fragments.TutorFragment;
 import com.xinyi.studyabroad.utils.StatusBarUtil;
 
@@ -27,6 +28,9 @@ import butterknife.ButterKnife;
  * 首页
  */
 public class MainActivity extends BaseActivity {
+
+    private String pro = "";
+    private String area = "";
 
     @BindView(R.id.footer_academy_tv)
     TextView footer_academy_tv;
@@ -47,7 +51,7 @@ public class MainActivity extends BaseActivity {
 
     private List<TextView> footers = new ArrayList<>();//footer
     private List<Fragment> contents = new ArrayList<>();//fragments
-    private TutorFragment tutorFragment;
+    private SchoolFragment schoolFragment;
     private AcademyFragment academyFragment;
     private FindFragment findFragment;
     private MineFragment mineFragment;
@@ -76,12 +80,12 @@ public class MainActivity extends BaseActivity {
         footers.add(footer_mine_tv);
 
         academyFragment = AcademyFragment.newInstance("", "");
-        tutorFragment = TutorFragment.newInstance("", "");
+        schoolFragment = SchoolFragment.newInstance("", "");
         findFragment = FindFragment.newInstance("", "");
         mineFragment = MineFragment.newInstance("", "");
 
         contents.add(academyFragment);
-        contents.add(tutorFragment);
+        contents.add(schoolFragment);
         contents.add(findFragment);
         contents.add(mineFragment);
         for (int i = 0; i < footers.size(); i++) {
@@ -95,6 +99,19 @@ public class MainActivity extends BaseActivity {
         }
 
         switchSelect(0);
+    }
+
+    /**
+     * 切换至学校列表
+     *
+     * @param pro
+     * @param area
+     */
+    public void changeToSchoolFragment(String pro, String area) {
+        //将当前条件保存
+        setArea(area);
+        setPro(pro);
+        switchSelect(1);
     }
 
 
@@ -143,4 +160,22 @@ public class MainActivity extends BaseActivity {
         }
         ft.commit();
     }
+
+
+    public String getPro() {
+        return pro;
+    }
+
+    public void setPro(String pro) {
+        this.pro = pro;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
+    }
+
 }

@@ -53,6 +53,7 @@
                         android:layout_height="wrap_content">
                         
                         <TextView
+                            android:id="@+id/topTitle"
                             android:text="@string/eg1"
                             android:textSize="@dimen/tv_13sp"
                             android:textColor="@color/colorMain"
@@ -60,6 +61,7 @@
                             android:layout_height="wrap_content" />
                         
                         <TextView
+                            android:visibility="gone"
                             android:text="@string/eg2"
                             android:textSize="@dimen/tv_10sp"
                             android:textColor="@color/colorMain"
@@ -98,6 +100,7 @@
                         android:layout_height="wrap_content">
 
                         <TextView
+                            android:id="@+id/bottomTitle"
                             android:text="@string/eg3"
                             android:textSize="@dimen/tv_13sp"
                             android:textColor="@color/colorMain"
@@ -105,6 +108,7 @@
                             android:layout_height="wrap_content" />
 
                         <TextView
+                            android:visibility="gone"
                             android:text="@string/eg2"
                             android:textSize="@dimen/tv_10sp"
                             android:textColor="@color/colorMain"
@@ -214,12 +218,14 @@
             </LinearLayout>
 
             <View
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="5dp"
                 android:background="@color/colorLine" />
 
             <!--排名-->
             <LinearLayout
+                android:visibility="gone"
                 android:padding="10dp"
                 android:id="@+id/ranking_layout"
                 android:layout_width="match_parent"

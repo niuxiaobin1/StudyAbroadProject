@@ -48,9 +48,14 @@ public class OrderManagerActivity extends BaseActivity {
         setContentView(R.layout.activity_order_manager);
         ButterKnife.bind(this);
         initViews();
-        initDatas();
     }
 
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initDatas();
+    }
 
     @Override
     protected void initViews() {
@@ -90,6 +95,7 @@ public class OrderManagerActivity extends BaseActivity {
                             if (result.getBoolean("result")) {
                                 JSONArray data = result.getJSONArray("data");
 
+                                adapter.clearDatas();
                                 if (identity_flag.equals("1")) {
                                     adapter.addDatas(JsonUtils.ArrayToList(data, new String[]{
                                             "order_code", "order_status", "service_date", "service_start_time"

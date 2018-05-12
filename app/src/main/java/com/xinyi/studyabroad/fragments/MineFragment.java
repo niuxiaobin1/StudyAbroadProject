@@ -11,6 +11,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -26,6 +27,7 @@ import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.activities.LoginActivity;
+import com.xinyi.studyabroad.activities.MainActivity;
 import com.xinyi.studyabroad.activities.OrderManagerActivity;
 import com.xinyi.studyabroad.activities.PersonSettingsActivity;
 import com.xinyi.studyabroad.base.BaseFragment;
@@ -33,6 +35,7 @@ import com.xinyi.studyabroad.callBack.DialogCallBack;
 import com.xinyi.studyabroad.callBack.HandleResponse;
 import com.xinyi.studyabroad.constants.AppUrls;
 import com.xinyi.studyabroad.constants.Configer;
+import com.xinyi.studyabroad.utils.AppManager;
 import com.xinyi.studyabroad.utils.DoParams;
 import com.xinyi.studyabroad.utils.GlideCircleTransform;
 import com.xinyi.studyabroad.utils.SpUtils;
@@ -103,6 +106,9 @@ public class MineFragment extends BaseFragment {
     //设置
     @BindView(R.id.settingsLayout)
     RelativeLayout settingsLayout;
+    //退出登录
+    @BindView(R.id.logoutLayout)
+    RelativeLayout logoutLayout;
 
     @BindView(R.id.parentView)
     LinearLayout parentView;
@@ -186,6 +192,16 @@ public class MineFragment extends BaseFragment {
             }
         });
 
+
+        logoutLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SpUtils.clear(getActivity());
+                AppManager.finishAllActivity();
+                Intent it = new Intent(getActivity(), MainActivity.class);
+                startActivity(it);
+            }
+        });
     }
 
     private boolean isLogin() {
@@ -225,10 +241,11 @@ public class MineFragment extends BaseFragment {
         String user_token = (String) SpUtils.get(getActivity(), SpUtils.USERUSER_TOKEN, "");
         if (TextUtils.isEmpty(user_token)) {
             //未登录
-            Glide.with(getActivity()).load(R.mipmap.ic_launcher).transform(new CenterCrop(getActivity()),
+            Glide.with(getActivity()).load(R.mipmap.user_icon).transform(new CenterCrop(getActivity()),
                     new GlideCircleTransform(getActivity())).into(imageHeader);
             topTextView.setText(R.string.clickLoginString);
             bottomTextView.setVisibility(View.GONE);
+            logoutLayout.setVisibility(View.GONE);
         } else {
             //登录
             String headerUrl = (String) SpUtils.get(getActivity(), SpUtils.USEIMAGE, "");
@@ -239,6 +256,7 @@ public class MineFragment extends BaseFragment {
             topTextView.setText(name);
             bottomTextView.setVisibility(View.VISIBLE);
             bottomTextView.setText(trueName);
+            logoutLayout.setVisibility(View.VISIBLE);
         }
         String identity_flag = (String) SpUtils.get(getActivity(), SpUtils.USERIDENTITY_FLAG, "");
         if (identity_flag.equals("1")) {

@@ -60,6 +60,8 @@ import butterknife.ButterKnife;
  */
 public class UniversityDetailActivity extends BaseActivity {
 
+    public static final String SCHOOL_ID = "_id";
+    private String id="";
 
     @BindView(R.id.banner_image)
     ImageView banner_image;//banner
@@ -175,6 +177,7 @@ public class UniversityDetailActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
+        id=getIntent().getStringExtra(SCHOOL_ID);
         initTab();
         initWebView();
         initListener();
@@ -346,7 +349,7 @@ public class UniversityDetailActivity extends BaseActivity {
     @Override
     protected void initDatas() {
         HttpParams params = new HttpParams();
-        params.put("id", "2");
+        params.put("id", id);
         super.initDatas();
         OkGo.<String>post(AppUrls.AcademyUrl)
                 .cacheMode(CacheMode.NO_CACHE)

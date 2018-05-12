@@ -47,6 +47,7 @@ public class SpUtils {
     public static final String USEMODIFIED="_modified";
     public static final String USEIMAGE="_image";
     public static final String USECARD_IMAGE="_card_image";
+    public static final String COUNTRY_ID="_country_id";
 
     public SpUtils() {
         /* cannot be instantiated */

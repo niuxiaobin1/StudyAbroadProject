@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">留学汇</string>
-    <string name="footer_academyString">院校</string>
-    <string name="footer_tutorString">导师</string>
+    <string name="footer_academyString">首页</string>
+    <string name="footer_tutorString">院校</string>
+    <string name="footer_schoolString">院校</string>
     <string name="footer_findString">发现</string>
     <string name="footer_mineString">我的</string>
 
@@ -12,8 +13,12 @@
     <string name="interesedString">你感兴趣的信息</string>
     <string name="recommentTitleString">— 推荐院校 —</string>
     <string name="hotTitleString">— 热门专业 —</string>
+    <string name="hotProfesionalString">热门专业</string>
     <string name="areaTitleString">— 热门地区 —</string>
+    <string name="areaBelongString">所属地区</string>
+    <string name="areaString">地区</string>
     <string name="rankingTitleString">— 排名 —</string>
+    <string name="rankingString">排名&#8195;&#8195;</string>
     <string name="recommentSubTitleString">总有一所学校适合你</string>
     <string name="hotSubTitleString">最受学生欢迎的专业</string>
     <string name="areaSubTitleString">学生最喜欢的地区前10</string>
@@ -38,6 +43,7 @@
     <string name="accountString">帐号</string>
     <string name="passwordString">密码</string>
     <string name="accountHintString">请输入登录帐号</string>
+    <string name="timeNostartString">还未到服务时间</string>
     <string name="passwordHintString">请输入登录密码</string>
     <string name="loginString">确认登录</string>
     <string name="noAccountMesgString">没有帐号，立即注册</string>
@@ -92,6 +98,7 @@
     <string name="myfllowString">我的关注</string>
     <string name="serverString">客服</string>
     <string name="settingsString">设置</string>
+    <string name="logoutString">退出登录</string>
     <string name="clickLoginString">点击登录</string>
     <string name="firstLoginString">请您先登录</string>
     <string name="serviceDateString">服务日期</string>
@@ -119,7 +126,12 @@
     <string name="finishServiceString">结束服务</string>
     <string name="toEvaluateString">去评价</string>
     <string name="complaintString">投诉</string>
+    <string name="finishOrderString">完成订单</string>
     <string name="deleteString">删除订单</string>
+    <string name="filterString">筛选</string>
+    <string name="filterClearString">清除筛选</string>
+    <string name="alertString">提示</string>
+    <string name="sureMessageString">确认要执行此操作吗？</string>
 
 
     <string name="eg1">常青藤学校</string>

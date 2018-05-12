@@ -11,6 +11,7 @@
     <color name="colorTransparentBlack">#88000000</color>
     <color name="colorFooter">#656565</color>
     <color name="colorMain">#656565</color>
+    <color name="colorEEE">#EEEEEE</color>
     <color name="colorSearchHint">#D6D2D2</color>
     <color name="colorTabSelected">#FFCF42</color>
     <color name="colorLine">#F6F6F6</color>
@@ -26,4 +27,5 @@
     <color name="loginWayColor">#B4B4B5</color>
     <color name="blackColor4A">#4A4A4A</color>
     <drawable name="color_title_transparent">#ffFFFFFF</drawable>
+    <color name="popu_dim_color">#8c000000</color>
 </resources>
