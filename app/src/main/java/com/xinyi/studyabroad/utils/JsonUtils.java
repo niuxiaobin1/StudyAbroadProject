@@ -1,5 +1,7 @@
 package com.xinyi.studyabroad.utils;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -28,5 +30,21 @@ public class JsonUtils {
             list.add(map);
         }
         return list;
+    }
+
+    public static String map2Json(List<Map<String, String>> data) {
+        JSONArray array = new JSONArray();
+        for (int i = 0; i < data.size(); i++) {
+            Map<String, String> map = data.get(i);
+            JSONObject obj = new JSONObject();
+            for (Map.Entry<String, String> entry : map.entrySet()) {
+                try {
+                    obj.put(entry.getKey(), entry.getValue());
+                } catch (JSONException e) {
+                }
+            }
+            array.put(obj);
+        }
+        return array.toString();
     }
 }

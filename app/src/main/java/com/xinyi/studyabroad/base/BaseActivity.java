@@ -2,8 +2,10 @@ package com.xinyi.studyabroad.base;
 
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.StringRes;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -58,6 +60,12 @@ public class BaseActivity extends AppCompatActivity {
             title_tv.setText(title);
         }
     }
+    protected void initTitle(@StringRes int title, @ColorRes int color){
+        if (title_tv!=null){
+            title_tv.setText(title);
+            title_tv.setTextColor(ContextCompat.getColor(this,color));
+        }
+    }
 
 
     protected void initRightText(@StringRes int right){
@@ -65,10 +73,21 @@ public class BaseActivity extends AppCompatActivity {
             right_tv.setText(right);
         }
     }
+    protected void initRightText(@StringRes int right, @ColorRes int color){
+        if (right_tv!=null){
+            right_tv.setText(right);
+            right_tv.setTextColor(ContextCompat.getColor(this,color));
+        }
+    }
 
     protected void initRightIcon(@DrawableRes int bg){
         if (right_tv!=null){
             right_tv.setBackgroundResource(bg);
+        }
+    }
+    protected void initleftIcon(@DrawableRes int bg){
+        if (back_image!=null){
+            back_image.setBackgroundResource(bg);
         }
     }
     protected void hideRightTv(){

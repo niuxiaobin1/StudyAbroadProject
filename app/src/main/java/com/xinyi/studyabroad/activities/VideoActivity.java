@@ -235,7 +235,7 @@ public class VideoActivity extends BaseActivity {
 
     // Tutorial Step 4
     private void joinChannel() {
-        mRtcEngine.joinChannel(null, "demoChannel1", "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
+        mRtcEngine.joinChannel(null, ChannelId, "Extra Optional Data", 0); // if you do not specify the uid, we will generate the uid for you
     }
 
     // Tutorial Step 5

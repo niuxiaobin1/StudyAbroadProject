@@ -117,7 +117,7 @@ public class TutorDetailActivity extends BaseActivity {
         });
         evaluationRecylerView.addItemDecoration(new DividerDecoration(this, R.color.colorLine,
                 DensityUtil.dip2px(this, 1)));
-        adapter = new EvaluationAdapter(this);
+        adapter=new EvaluationAdapter(this);
         evaluationRecylerView.setAdapter(adapter);
 
         personalProfileTv.setMaxLines(4);
@@ -223,7 +223,7 @@ public class TutorDetailActivity extends BaseActivity {
                                 JSONArray review_list = js.getJSONObject("data").getJSONArray("review_list");
 
                                 adapter.addDatas(JsonUtils.ArrayToList(review_list,
-                                        new String[]{"true_name", "image", "content", "stars", "created"}));
+                                        new String[]{"true_name", "image", "content", "stars", "created","service_name"}));
 
                                 if (!TextUtils.isEmpty(favorite_flag) && !favorite_flag.equals("0")) {
                                     fllow_tv.setSelected(true);

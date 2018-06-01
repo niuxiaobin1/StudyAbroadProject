@@ -55,6 +55,7 @@ public class EvaluationAdapter extends BaseAdapter<EvaluationAdapter.ViewHolder>
         holder.eva_content.setText(map.get("content"));
         holder.eva_score.setText(map.get("stars"));
         holder.eva_time.setText(map.get("created"));
+        holder.eva_personInfo.setText(map.get("service_name"));
     }
 
     @Override
@@ -74,6 +75,8 @@ public class EvaluationAdapter extends BaseAdapter<EvaluationAdapter.ViewHolder>
         TextView eva_score;
         @BindView(R.id.eva_time)
         TextView eva_time;
+        @BindView(R.id.eva_personInfo)
+        TextView eva_personInfo;
 
         public ViewHolder(View itemView) {
             super(itemView);

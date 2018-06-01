@@ -6,7 +6,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,6 +28,7 @@ import com.xinyi.studyabroad.base.StudyAbroadApp;
 import com.xinyi.studyabroad.callBack.DialogCallBack;
 import com.xinyi.studyabroad.callBack.HandleResponse;
 import com.xinyi.studyabroad.constants.AppUrls;
+import com.xinyi.studyabroad.fragments.AcademyFragment;
 import com.xinyi.studyabroad.utils.DensityUtil;
 import com.xinyi.studyabroad.utils.DoParams;
 import com.xinyi.studyabroad.utils.GlideRoundTransform;
@@ -174,6 +174,7 @@ public class InnerFragment extends BaseFragment {
                                 countryList = JsonUtils.ArrayToList(country, new String[]{
                                         "id", "name"
                                 });
+                                ((AcademyFragment)getParentFragment()).setCountry(countryList);
                                 //school_elite
                                 JSONArray school_elite = data.getJSONArray("school_elite");
                                 eliteList = JsonUtils.ArrayToList(school_elite, new String[]{
@@ -224,6 +225,10 @@ public class InnerFragment extends BaseFragment {
      * 加载数据
      */
     private void initCommandViews() {
+        recommendBottomViews.clear();
+        recommendTopViews.clear();
+        hotViews.clear();
+        areaViews.clear();
         for (int i = 0; i < eliteList.size(); i++) {
             recommendTopViews.add(makeRecommendView(eliteList.get(i)));
 
@@ -247,6 +252,9 @@ public class InnerFragment extends BaseFragment {
                 recommendTopViews.get(i).setPadding(0, 0, DensityUtil.dip2px(getActivity(), 5), 0);
             } else if (i == recommendTopViews.size() - 1) {
                 recommendTopViews.get(i).setPadding(DensityUtil.dip2px(getActivity(), 5), 0, 0, 0);
+            }else{
+                recommendTopViews.get(i).setPadding(DensityUtil.dip2px(getActivity(), 2.5f), 0, DensityUtil.dip2px(getActivity(), 2.5f), 0);
+
             }
         }
 
@@ -255,6 +263,8 @@ public class InnerFragment extends BaseFragment {
                 recommendBottomViews.get(i).setPadding(0, 0, DensityUtil.dip2px(getActivity(), 5), 0);
             } else if (i == recommendTopViews.size() - 1) {
                 recommendBottomViews.get(i).setPadding(DensityUtil.dip2px(getActivity(), 5), 0, 0, 0);
+            }else{
+                recommendBottomViews.get(i).setPadding(DensityUtil.dip2px(getActivity(), 2.5f), 0, DensityUtil.dip2px(getActivity(), 2.5f), 0);
             }
         }
 
@@ -512,5 +522,11 @@ public class InnerFragment extends BaseFragment {
         public float getPageWidth(int position) {
             return 0.25f;
         }
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+        initDatas();
     }
 }

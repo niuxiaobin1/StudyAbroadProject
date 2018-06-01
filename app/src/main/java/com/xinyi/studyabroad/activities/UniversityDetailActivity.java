@@ -8,6 +8,7 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.design.widget.TabLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -37,6 +38,7 @@ import com.xinyi.studyabroad.utils.DensityUtil;
 import com.xinyi.studyabroad.utils.DividerDecoration;
 import com.xinyi.studyabroad.utils.DoParams;
 import com.xinyi.studyabroad.utils.GlideCircleTransform;
+import com.xinyi.studyabroad.utils.SpUtils;
 import com.xinyi.studyabroad.utils.StatusBarUtil;
 import com.xinyi.studyabroad.utils.UIHelper;
 import com.xinyi.studyabroad.weight.MyGridView;
@@ -60,8 +62,14 @@ import butterknife.ButterKnife;
  */
 public class UniversityDetailActivity extends BaseActivity {
 
+
     public static final String SCHOOL_ID = "_id";
-    private String id="";
+    private String id = "";
+
+    private String favorite_flag;//0:未关注 否则是fid
+
+    @BindView(R.id.fllow_tv)
+    TextView fllow_tv;
 
     @BindView(R.id.banner_image)
     ImageView banner_image;//banner
@@ -102,6 +110,10 @@ public class UniversityDetailActivity extends BaseActivity {
 
     @BindView(R.id.isShorten_tv)
     TextView isShorten_tv;//是否展开webview
+
+    //校徽
+    @BindView(R.id.badgeImage)
+    ImageView badgeImage;
 
     //学校详情Webview
     @BindView(R.id.introdection_webview)
@@ -154,9 +166,7 @@ public class UniversityDetailActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_university_detail);
-        StatusBarUtil.StatusBarLightMode(this);
         ButterKnife.bind(this);
-        title_layout.setPadding(0, StatusBarUtil.getStatusBarHeight(this), 0, 0);
         initViews();
         initDatas();
     }
@@ -177,7 +187,7 @@ public class UniversityDetailActivity extends BaseActivity {
     @Override
     protected void initViews() {
         super.initViews();
-        id=getIntent().getStringExtra(SCHOOL_ID);
+        id = getIntent().getStringExtra(SCHOOL_ID);
         initTab();
         initWebView();
         initListener();
@@ -185,7 +195,8 @@ public class UniversityDetailActivity extends BaseActivity {
         drawable = getResources().getDrawable(R.drawable.color_title_transparent);
         drawable.setAlpha(START_ALPHA);
         title_layout.setBackgroundDrawable(drawable);
-
+        title_layout.setPadding(0, StatusBarUtil.getStatusBarHeight(
+                UniversityDetailActivity.this), 0, 0);
 
         appMinHeight = StatusBarUtil.getStatusBarHeight(UniversityDetailActivity.this) + DensityUtil.dip2px(UniversityDetailActivity.this, 80);
         fadingHeight = DensityUtil.dip2px(this, 240) - appMinHeight;
@@ -199,6 +210,13 @@ public class UniversityDetailActivity extends BaseActivity {
         });
         tutor_recylerView.addItemDecoration(new DividerDecoration(this, R.color.colorWhite,
                 DensityUtil.dip2px(this, 5)));
+
+        fllow_tv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                doFavo();
+            }
+        });
 
     }
 
@@ -262,9 +280,7 @@ public class UniversityDetailActivity extends BaseActivity {
                     isShorten_tv.setText(R.string.openString);
                 }
                 isShort = !isShort;
-//                if (CommonUtils.getUserLocale(UniversityDetailActivity.this) == null) {
-//                    CommonUtils.setLanguage(CommonUtils.LOCALE_ENGLISH, UniversityDetailActivity.this);
-//                }
+
             }
         });
 
@@ -278,8 +294,11 @@ public class UniversityDetailActivity extends BaseActivity {
 
                 }
                 if (verticalOffset == fadingHeight) {
+                    StatusBarUtil.StatusBarLightMode(UniversityDetailActivity.this);
                     back_image.setImageResource(R.mipmap.arrow_back);
                 } else {
+                    StatusBarUtil.StatusBarDarkMode(UniversityDetailActivity.this);
+                    StatusBarUtil.transparencyBar(UniversityDetailActivity.this);
                     back_image.setImageResource(R.mipmap.back_white);
                 }
                 title_tv.setTextColor(Color.argb((int) ((float) verticalOffset / (float) fadingHeight * 255), 0, 0, 0));
@@ -348,12 +367,14 @@ public class UniversityDetailActivity extends BaseActivity {
 
     @Override
     protected void initDatas() {
+        String user_token = (String) SpUtils.get(this, SpUtils.USERUSER_TOKEN, "");
         HttpParams params = new HttpParams();
         params.put("id", id);
+        params.put("user_token", user_token);
         super.initDatas();
         OkGo.<String>post(AppUrls.AcademyUrl)
                 .cacheMode(CacheMode.NO_CACHE)
-                .params(DoParams.encryptionparams(this, params, ""))
+                .params(DoParams.encryptionparams(this, params, user_token))
                 .tag(this)
                 .execute(new DialogCallBack(UniversityDetailActivity.this, false) {
                     @Override
@@ -416,6 +437,17 @@ public class UniversityDetailActivity extends BaseActivity {
 
                                 String apply_list = object.getString("apply_list");
                                 inforList_tv.setText(apply_list);
+
+                                Glide.with(UniversityDetailActivity.this).load(
+                                        object.getString("school_badge")).transform(new
+                                        GlideCircleTransform(UniversityDetailActivity.this)).
+                                        into(badgeImage);
+                                favorite_flag = object.getString("favorite_flag");
+                                if (!TextUtils.isEmpty(favorite_flag) && !favorite_flag.equals("0")) {
+                                    fllow_tv.setSelected(true);
+                                } else {
+                                    fllow_tv.setSelected(false);
+                                }
                             } else {
                                 UIHelper.toastMsg(result.getString("message"));
                             }
@@ -622,5 +654,71 @@ public class UniversityDetailActivity extends BaseActivity {
                 e.printStackTrace();
             }
         }
+    }
+
+
+    /**
+     * 收藏取消收藏
+     */
+    private void doFavo() {
+        String user_token = (String) SpUtils.get(this, SpUtils.USERUSER_TOKEN, "");
+        if (TextUtils.isEmpty(user_token)) {
+            showToast(R.string.firstLoginString);
+            return;
+        }
+        HttpParams params = new HttpParams();
+        params.put("user_token", user_token);
+        String fllowUrl = AppUrls.Add_school_favoriteUrl;
+        if (!TextUtils.isEmpty(favorite_flag) && !favorite_flag.equals("0")) {
+            //已关注
+            fllowUrl = AppUrls.Remove_school_favoriteUrl;
+            params.put("fid", favorite_flag);
+        } else {
+            fllowUrl = AppUrls.Add_school_favoriteUrl;
+            params.put("school_id", id);
+        }
+
+        OkGo.<String>post(fllowUrl)
+                .cacheMode(CacheMode.NO_CACHE)
+                .tag(this)
+                .params(DoParams.encryptionparams(UniversityDetailActivity.this, params, user_token))
+                .execute(new DialogCallBack(UniversityDetailActivity.this, false) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+                        try {
+                            JSONObject js = new JSONObject(response.body());
+
+                            if (js.getBoolean("result")) {
+                                if (!TextUtils.isEmpty(favorite_flag) && !favorite_flag.equals("0")) {
+                                    //已关注
+                                    favorite_flag = "0";
+                                    fllow_tv.setSelected(false);
+                                } else {
+                                    favorite_flag = js.getString("data");
+                                    fllow_tv.setSelected(true);
+                                }
+
+                            } else {
+
+                                UIHelper.toastMsg(js.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            UIHelper.toastMsg(e.getMessage());
+                        }
+                    }
+
+
+                    @Override
+                    public String convertResponse(okhttp3.Response response) throws Throwable {
+                        HandleResponse.handleReponse(response);
+                        return super.convertResponse(response);
+                    }
+
+                    @Override
+                    public void onError(com.lzy.okgo.model.Response<String> response) {
+                        super.onError(response);
+                        HandleResponse.handleException(response, UniversityDetailActivity.this);
+                    }
+                });
     }
 }

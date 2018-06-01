@@ -50,23 +50,35 @@
                             android:layout_alignParentBottom="true"
                             android:background="@color/colorTransparentBlack"
                             android:gravity="center"
-                            android:orientation="vertical"
+                            android:orientation="horizontal"
                             android:padding="5dp">
 
-                            <TextView
-                                android:id="@+id/academy_name"
+                            <ImageView
+                                android:id="@+id/badgeImage"
+                                android:layout_marginRight="10dp"
+                                android:layout_width="30dp"
+                                android:layout_height="30dp" />
+
+                            <LinearLayout
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="@dimen/tv_14sp" />
+                                android:gravity="center"
+                                android:orientation="vertical">
 
-                            <TextView
-                                android:id="@+id/academy_ranking"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textColor="@color/colorWhite"
-                                android:textSize="@dimen/tv_12sp" />
+                                <TextView
+                                    android:id="@+id/academy_name"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="@dimen/tv_14sp" />
 
+                                <TextView
+                                    android:id="@+id/academy_ranking"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:textColor="@color/colorWhite"
+                                    android:textSize="@dimen/tv_12sp" />
+                            </LinearLayout>
                         </LinearLayout>
 
                     </RelativeLayout>
@@ -323,5 +335,25 @@
             android:layout_centerHorizontal="true"
             android:gravity="center"
             android:textSize="@dimen/tv_15sp" />
+
+        <RelativeLayout
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp">
+
+            <TextView
+                android:id="@+id/fllow_tv"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:background="@drawable/user_fllow_select"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorSubTitle"
+                android:textSize="@dimen/tv_14sp" />
+
+        </RelativeLayout>
+
+
     </RelativeLayout>
 </RelativeLayout>

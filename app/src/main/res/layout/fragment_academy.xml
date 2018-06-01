@@ -18,12 +18,12 @@
             android:padding="10dp">
 
             <TextView
+                android:id="@+id/countryTv"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:drawablePadding="10dp"
                 android:drawableRight="@mipmap/arrow_down"
-                android:text="@string/americaString"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/tv_15sp" />
 

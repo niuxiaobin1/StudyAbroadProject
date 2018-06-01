@@ -6,6 +6,7 @@ import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
+import android.support.multidex.MultiDexApplication;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -33,7 +34,7 @@ import okhttp3.OkHttpClient;
  * Created by Administrator on 2018/4/16.
  */
 
-public class StudyAbroadApp extends Application {
+public class StudyAbroadApp extends MultiDexApplication {
 
 
     private String country_id = "0";

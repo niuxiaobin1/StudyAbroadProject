@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:orientation="horizontal"
+    android:paddingTop="10dp"
+    android:paddingBottom="10dp"
+    android:gravity="center_vertical"
+    android:layout_height="wrap_content">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/payCodeTv"
+            android:textSize="@dimen/tv_14sp"
+            android:textColor="@color/colorMain"
+            android:text="@string/ordercodeString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/payDatev"
+            android:layout_marginTop="5dp"
+            android:textSize="@dimen/tv_14sp"
+            android:textColor="@color/colorSubTitle"
+            android:text="@string/ordercodeString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/payNumTv"
+        android:textSize="@dimen/tv_14sp"
+        android:textColor="@color/colorGreen"
+        android:text="@string/ordercodeString"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

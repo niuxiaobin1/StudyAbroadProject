@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.xinyi.studyabroad.activities.EvaluateActivity">
+
+    <include layout="@layout/back_title_bar" />
+
+    <EditText
+        android:focusable="false"
+        android:id="@+id/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/evaluate_edite_bg"
+        android:gravity="start"
+        android:hint="@string/evaluateHintString"
+        android:padding="10dp"
+        android:textColor="@color/colorMain"
+        android:textColorHint="@color/colorSearchHint"
+        android:textSize="@dimen/tv_14sp" />
+
+    <TextView
+        android:id="@+id/anonymousTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@drawable/paymethod_selector"
+        android:drawablePadding="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/anonymousString"
+        android:textColor="@color/colorMain"
+        android:textSize="@dimen/tv_14sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorEEE" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:gravity="center_vertical"
+        android:text="@string/userEvaluateString"
+        android:textColor="@color/colorBlack"
+        android:textSize="@dimen/tv_15sp" />
+
+    <LinearLayout
+        android:visibility="gone"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="@dimen/tv_14sp"
+            android:textColor="@color/colorMain"
+            android:text="@string/describeStarString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.iarcuschin.simpleratingbar.SimpleRatingBar
+            android:id="@+id/describeRatingBar"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srb_starSize="35dp"
+            app:srb_numberOfStars="5"
+            app:srb_rating="3"
+            app:srb_stepSize="0.5"
+            app:srb_starBackgroundColor="@color/colorLineE6"
+            app:srb_borderColor="@color/colorWhite"
+            app:srb_fillColor="@color/colorTabSelected"
+            />
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:textSize="@dimen/tv_14sp"
+            android:textColor="@color/colorMain"
+            android:text="@string/wholeStarString"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <com.iarcuschin.simpleratingbar.SimpleRatingBar
+            android:id="@+id/wholeRatingBar"
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srb_starSize="35dp"
+            app:srb_numberOfStars="5"
+            app:srb_rating="0"
+            app:srb_stepSize="0.5"
+            app:srb_starBackgroundColor="@color/colorLineE6"
+            app:srb_borderColor="@color/colorWhite"
+            app:srb_fillColor="@color/colorTabSelected"
+            />
+    </LinearLayout>
+
+
+    <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/commit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/login_btn_bg"
+        android:gravity="center"
+        android:text="@string/sureString"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/tv_15sp" />
+
+</LinearLayout>

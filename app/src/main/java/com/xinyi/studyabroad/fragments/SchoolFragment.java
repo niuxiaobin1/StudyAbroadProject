@@ -160,7 +160,8 @@ public class SchoolFragment extends BaseFragment {
         right_tv.setVisibility(View.VISIBLE);
         title_tv.setText(R.string.footer_schoolString);
         initRightTv(R.string.filterString, getResources().getDrawable(R.mipmap.select_icon_new));
-        parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+
+//        parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
 
         recylerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recylerView.addItemDecoration(new DividerDecoration(getActivity(), R.color.colorLineE0D,
@@ -248,6 +249,7 @@ public class SchoolFragment extends BaseFragment {
             });
         }
     }
+
 
     /**
      * 筛选
@@ -337,5 +339,18 @@ public class SchoolFragment extends BaseFragment {
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
+    }
+
+    @Override
+    public void refresh() {
+        super.refresh();
+        if (proList==null||areaList==null){
+            return;
+        }
+        popupWindow=null;
+        page=1;
+        proList.clear();
+        areaList.clear();
+        initDatas();
     }
 }

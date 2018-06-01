@@ -118,8 +118,8 @@ public class OrderTeacherAdapter extends BaseAdapter<OrderTeacherAdapter.ViewHol
             changeVisbility(0, holder);
         } else if (order_status.equals("4")) {
             holder.left_tv.setText(R.string.finishServiceString);
-            holder.right_tv.setText("");
-            changeVisbility(1, holder);
+            holder.right_tv.setText(R.string.LaunchVideoString);
+            changeVisbility(0, holder);
         } else if (order_status.equals("5")) {
             if (identity_flag.equals("1")) {
                 holder.left_tv.setText(R.string.complaintString);
@@ -164,7 +164,7 @@ public class OrderTeacherAdapter extends BaseAdapter<OrderTeacherAdapter.ViewHol
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if (order_status.equals("3")) {
+                        if (order_status.equals("3")||order_status.equals("4")) {
                             //视频聊天
                             Intent it = new Intent(context, VideoActivity.class);
                             it.putExtra(VideoActivity.CHANNEL, map.get("order_code"));

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.xinyi.studyabroad.activities.CustomerServiceActivity">
+
+    <include layout="@layout/back_title_bar" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLineE0D"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:background="@drawable/edite_bg"
+        android:gravity="center_vertical"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        android:orientation="horizontal"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <TextView
+            android:textSize="@dimen/tv_15sp"
+            android:textColor="@color/colorBlack"
+            android:text="@string/adresstring"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <EditText
+            android:focusable="false"
+            android:id="@+id/emailEt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:background="@null"
+            android:gravity="start"
+            android:hint="@string/mailHintString"
+            android:textColor="@color/colorMain"
+            android:textColorHint="@color/colorSearchHint"
+            android:textSize="@dimen/tv_14sp" />
+
+    </LinearLayout>
+    
+    <EditText
+        android:focusable="false"
+        android:id="@+id/edittext"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/evaluate_edite_bg"
+        android:gravity="start"
+        android:hint="@string/evaluateHintString"
+        android:padding="10dp"
+        android:textColor="@color/colorMain"
+        android:textColorHint="@color/colorSearchHint"
+        android:textSize="@dimen/tv_14sp" />
+
+    <Button
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:id="@+id/commit_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/login_btn_bg"
+        android:gravity="center"
+        android:text="@string/sureString"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/tv_15sp" />
+
+</LinearLayout>

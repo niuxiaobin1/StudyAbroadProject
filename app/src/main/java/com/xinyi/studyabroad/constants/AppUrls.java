@@ -26,5 +26,14 @@ public class AppUrls {
     public static final String FrontHomeUrl = HostAddress + "front/home";
     public static final String SchoolSearchUrl = HostAddress + "school/search";
     public static final String OrderUpdateUrl = HostAddress + "order/update";
+    public static final String ServiceListsUrl = HostAddress + "service/lists";
+    public static final String ServiceSaveUrl = HostAddress + "service/save";
+    public static final String Add_school_favoriteUrl = HostAddress + "customer/add_school_favorite";
+    public static final String Remove_school_favoriteUrl = HostAddress + "customer/remove_school_favorite";
+    public static final String School_favoriteUrl = HostAddress + "customer/school_favorite";
+    public static final String Customer_favoriteUrl = HostAddress + "customer/favorite";
+    public static final String SchoolRecommendUrl = HostAddress + "school/recommend";
+    public static final String CustomerMy_walletUrl = HostAddress + "customer/my_wallet";
+    public static final String CustomerMy_evaluationUrl = HostAddress + "customer/my_evaluation";
 
 }

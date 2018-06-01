@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorWhite"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.xinyi.studyabroad.activities.MyEvaluateListActivity">
+
+    <include layout="@layout/back_title_bar" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/colorLineE0D" />
+
+    <com.xinyi.studyabroad.PullRefreshLayout.PullRefreshLayout
+        android:id="@+id/refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
+        app:refreshMode="both">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recylerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"></android.support.v7.widget.RecyclerView>
+    </com.xinyi.studyabroad.PullRefreshLayout.PullRefreshLayout>
+
+</LinearLayout>

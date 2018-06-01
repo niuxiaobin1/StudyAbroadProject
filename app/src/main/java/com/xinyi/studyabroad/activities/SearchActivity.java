@@ -1,5 +1,6 @@
 package com.xinyi.studyabroad.activities;
 
+import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -16,15 +17,28 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.lzy.okgo.OkGo;
+import com.lzy.okgo.cache.CacheMode;
+import com.lzy.okgo.model.HttpParams;
+import com.lzy.okgo.model.Response;
 import com.nex3z.flowlayout.FlowLayout;
 import com.xinyi.studyabroad.R;
 import com.xinyi.studyabroad.adapter.RecordAdapter;
 import com.xinyi.studyabroad.base.BaseActivity;
+import com.xinyi.studyabroad.callBack.DialogCallBack;
+import com.xinyi.studyabroad.callBack.HandleResponse;
+import com.xinyi.studyabroad.constants.AppUrls;
 import com.xinyi.studyabroad.sqliteTable.MyDatabaseHelper;
 import com.xinyi.studyabroad.utils.CommonUtils;
 import com.xinyi.studyabroad.utils.DensityUtil;
 import com.xinyi.studyabroad.utils.DividerDecoration;
+import com.xinyi.studyabroad.utils.DoParams;
+import com.xinyi.studyabroad.utils.SpUtils;
 import com.xinyi.studyabroad.utils.UIHelper;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -131,19 +145,70 @@ public class SearchActivity extends BaseActivity {
             }
         });
 
-        for (int i = 0; i < 2; i++) {
-            View v = LayoutInflater.from(this).inflate(R.layout.flow_item, null);
-            TextView tv = v.findViewById(R.id.content);
-            tv.setText("纽约校区");
-            flowLayout.addView(v);
-        }
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         queryDb();
     }
 
     @Override
     protected void initDatas() {
         super.initDatas();
+
+        HttpParams params = new HttpParams();
+        OkGo.<String>post(AppUrls.SchoolRecommendUrl)
+                .cacheMode(CacheMode.NO_CACHE)
+                .params(DoParams.encryptionparams(SearchActivity.this, params, ""))
+                .tag(this)
+                .execute(new DialogCallBack( SearchActivity.this, false) {
+                    @Override
+                    public void onSuccess(Response<String> response) {
+
+                        try {
+                            JSONObject result = new JSONObject(response.body());
+                            if (result.getBoolean("result")) {
+                                JSONArray array=result.getJSONArray("data");
+                                for (int i = 0; i < array.length(); i++) {
+                                    View v = LayoutInflater.from(SearchActivity.this).inflate(R.layout.flow_item, null);
+                                    TextView tv = v.findViewById(R.id.content);
+                                    final String text=array.getJSONObject(i).getString("school_name");
+                                    tv.setText(text);
+                                    v.setOnClickListener(new View.OnClickListener() {
+                                        @Override
+                                        public void onClick(View v) {
+                                            input_et.setText(text);
+                                            doSearch(text);
+                                        }
+                                    });
+                                    flowLayout.addView(v);
+                                }
+
+                            } else {
+                                UIHelper.toastMsg(result.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            UIHelper.toastMsg(e.getMessage());
+                        }
+
+                    }
+
+                    @Override
+                    public String convertResponse(okhttp3.Response response) throws Throwable {
+                        HandleResponse.handleReponse(response);
+                        return super.convertResponse(response);
+                    }
+
+
+                    @Override
+                    public void onError(com.lzy.okgo.model.Response<String> response) {
+                        super.onError(response);
+                        HandleResponse.handleException(response, SearchActivity.this);
+                    }
+                });
     }
 
     /**

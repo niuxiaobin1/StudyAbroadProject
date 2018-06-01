@@ -2,6 +2,7 @@ package com.xinyi.studyabroad.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.ViewGroup;
 
 import java.util.ArrayList;
@@ -29,6 +30,9 @@ public abstract class BaseAdapter<T extends RecyclerView.ViewHolder> extends Rec
     public void addDatas(List<Map<String, String>> list) {
         datas.addAll(list);
         notifyDataSetChanged();
+    }
+    public List<Map<String, String>> getDatas() {
+        return datas;
     }
 
 }

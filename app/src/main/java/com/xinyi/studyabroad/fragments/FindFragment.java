@@ -118,7 +118,7 @@ public class FindFragment extends BaseFragment {
         back_image.setVisibility(View.GONE);
         right_tv.setVisibility(View.GONE);
         title_tv.setText(R.string.footer_findString);
-        parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
+//        parentView.setPadding(0, StatusBarUtil.getStatusBarHeight(getActivity()), 0, 0);
 
         recylerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recylerView.addItemDecoration(new DividerDecoration(getActivity(), R.color.colorWhite,

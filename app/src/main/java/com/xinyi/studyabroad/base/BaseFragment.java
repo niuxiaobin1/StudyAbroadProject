@@ -63,6 +63,9 @@ public abstract class BaseFragment extends Fragment {
         toast.show();
     }
 
+    public void refresh(){
+
+    }
 
     public abstract void initViews();
 

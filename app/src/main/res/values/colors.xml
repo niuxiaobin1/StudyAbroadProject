@@ -16,8 +16,10 @@
     <color name="colorTabSelected">#FFCF42</color>
     <color name="colorLine">#F6F6F6</color>
     <color name="colorLineE0D">#E0DDDD</color>
+    <color name="colorLineE6">#E6E6E6</color>
     <color name="colorSubTitle">#9B9B9B</color>
     <color name="colorpinkColor">#FF5239</color>
+    <color name="colorredColor">#FF0000</color>
     <color name="colorStrokeColor">#CFCBCB</color>
     <color name="colorGrayColor">#F6F6F6</color>
     <color name="colorGrayE6">#E6E6E6</color>

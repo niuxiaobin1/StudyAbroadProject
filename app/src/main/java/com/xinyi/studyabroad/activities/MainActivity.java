@@ -114,6 +114,13 @@ public class MainActivity extends BaseActivity {
         switchSelect(1);
     }
 
+    public void refresh(){
+        setArea("");
+        setPro("");
+        if (schoolFragment!=null){
+            schoolFragment.refresh();
+        }
+    }
 
     public void switchSelect(int which) {
         for (int i = 0; i < footers.size(); i++) {
@@ -135,6 +142,8 @@ public class MainActivity extends BaseActivity {
         }
 
     }
+
+
 
     private void changeFragment(int index) {
         curentIndex = index;
@@ -177,5 +186,6 @@ public class MainActivity extends BaseActivity {
     public void setArea(String area) {
         this.area = area;
     }
+
 
 }

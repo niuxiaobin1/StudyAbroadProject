@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.xinyi.studyabroad.activities.TimeManagementActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="@color/colorBlack"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:background="@color/colorWhite" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <include layout="@layout/back_title_bar" />
+
+        <android.support.v7.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@color/colorWhite"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp">
+
+            <LinearLayout
+                android:gravity="center_horizontal"
+                android:padding="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:textSize="@dimen/tv_15sp"
+                    android:id="@+id/main_YYMM_Tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:padding="10dp"
+                    android:textColor="@color/colorBlueColor"
+                    android:text="" />
+                
+                <sun.bob.mcalendarview.views.WeekColumnView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    ></sun.bob.mcalendarview.views.WeekColumnView>
+                
+                <View
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@color/colorLineE0D"/>
+
+                <sun.bob.mcalendarview.views.ExpCalendarView
+                    android:id="@+id/calendar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    tools:context=".activities.TimeManagementActivity" />
+            </LinearLayout>
+
+
+        </android.support.v7.widget.CardView>
+
+        <TextView
+            android:id="@+id/add_timesTv"
+            android:layout_marginTop="10dp"
+            android:text="@string/addTimeString"
+            android:textSize="@dimen/tv_15sp"
+            android:textColor="@color/colorLoginBtnColor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
+            android:id="@+id/time_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    </LinearLayout>
+
+</RelativeLayout>

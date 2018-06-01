@@ -22,6 +22,7 @@ import com.xinyi.studyabroad.constants.AppUrls;
 import com.xinyi.studyabroad.constants.Configer;
 import com.xinyi.studyabroad.utils.DoParams;
 import com.xinyi.studyabroad.utils.SpUtils;
+import com.xinyi.studyabroad.utils.StatusBarUtil;
 import com.xinyi.studyabroad.utils.UIHelper;
 
 import org.json.JSONException;
@@ -53,6 +54,8 @@ public class LoginActivity extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        StatusBarUtil.StatusBarDarkMode(this);
+        StatusBarUtil.transparencyBar(this);
         ButterKnife.bind(this);
         initViews();
         initDatas();

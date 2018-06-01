@@ -26,10 +26,16 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.activities.AccountManagerActivity;
+import com.xinyi.studyabroad.activities.CustomerServiceActivity;
 import com.xinyi.studyabroad.activities.LoginActivity;
 import com.xinyi.studyabroad.activities.MainActivity;
+import com.xinyi.studyabroad.activities.MyEvaluateListActivity;
+import com.xinyi.studyabroad.activities.MyFocusActivity;
+import com.xinyi.studyabroad.activities.MypurseActivity;
 import com.xinyi.studyabroad.activities.OrderManagerActivity;
 import com.xinyi.studyabroad.activities.PersonSettingsActivity;
+import com.xinyi.studyabroad.activities.TimeManagementActivity;
 import com.xinyi.studyabroad.base.BaseFragment;
 import com.xinyi.studyabroad.callBack.DialogCallBack;
 import com.xinyi.studyabroad.callBack.HandleResponse;
@@ -202,6 +208,72 @@ public class MineFragment extends BaseFragment {
                 startActivity(it);
             }
         });
+        timeManagerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLogin()) {
+                    Intent it = new Intent(getActivity(), TimeManagementActivity.class);
+                    startActivity(it);
+                } else {
+                    toLogin();
+                }
+
+            }
+        });
+        myfllowLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLogin()) {
+                    Intent it = new Intent(getActivity(), MyFocusActivity.class);
+                    startActivity(it);
+                } else {
+                    toLogin();
+                }
+            }
+        });
+
+        mypauseLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLogin()) {
+                    Intent it = new Intent(getActivity(), MypurseActivity.class);
+                    startActivity(it);
+                } else {
+                    toLogin();
+                }
+            }
+        });
+        payManagerLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLogin()) {
+                    Intent it = new Intent(getActivity(), AccountManagerActivity.class);
+                    startActivity(it);
+                } else {
+                    toLogin();
+                }
+            }
+        });
+        myevaluationLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isLogin()) {
+                    Intent it = new Intent(getActivity(), MyEvaluateListActivity.class);
+                    startActivity(it);
+                } else {
+                    toLogin();
+                }
+            }
+        });
+        serverLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent it = new Intent(getActivity(), CustomerServiceActivity.class);
+                startActivity(it);
+
+            }
+        });
+
     }
 
     private boolean isLogin() {
@@ -286,8 +358,10 @@ public class MineFragment extends BaseFragment {
             timeManagerLayout.setVisibility(View.GONE);
             myfllowLayout.setVisibility(View.VISIBLE);
             myevaluationLayout.setVisibility(View.GONE);
+            mypauseLayout.setVisibility(View.GONE);
 
         } else {
+            mypauseLayout.setVisibility(View.VISIBLE);
             payManagerLayout.setVisibility(View.GONE);
             timeManagerLayout.setVisibility(View.VISIBLE);
             myfllowLayout.setVisibility(View.GONE);

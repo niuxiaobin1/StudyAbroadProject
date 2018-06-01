@@ -9,6 +9,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="americaString">美国</string>
+    <string name="allString">全部</string>
     <string name="amademyTitleString">InnoEdu</string>
     <string name="interesedString">你感兴趣的信息</string>
     <string name="recommentTitleString">— 推荐院校 —</string>
@@ -37,8 +38,11 @@
     <string name="scoreString">评分</string>
     <string name="cancleString">取消</string>
     <string name="emptyString"></string>
+    <string name="emptyAlertString">内容为空</string>
     <string name="timeslotString">时长：</string>
     <string name="timeStartString">开始时间：</string>
+    <string name="timeStartString1">开始时间</string>
+    <string name="timeEndString">结束时间</string>
 
     <string name="accountString">帐号</string>
     <string name="passwordString">密码</string>
@@ -111,6 +115,8 @@
     <string name="totalString">合计：</string>
     <string name="sureString">确认</string>
     <string name="minuteString">分钟</string>
+    <string name="yearString">年</string>
+    <string name="monthString">月</string>
     <string name="slotTimeEmptyString">请先选择开始时间</string>
     <string name="askContentEmptyString">请先输入咨询内容</string>
     <string name="orderListTitleString">预约管理</string>
@@ -128,10 +134,37 @@
     <string name="complaintString">投诉</string>
     <string name="finishOrderString">完成订单</string>
     <string name="deleteString">删除订单</string>
+    <string name="deleteString1">删除</string>
     <string name="filterString">筛选</string>
     <string name="filterClearString">清除筛选</string>
     <string name="alertString">提示</string>
     <string name="sureMessageString">确认要执行此操作吗？</string>
+    <string name="editString">编辑</string>
+    <string name="addTimeString">添加服务时间</string>
+    <string name="evaluateHintString">说点什么吧</string>
+    <string name="mailHintString">输入邮件地址</string>
+    <string name="evaluateString">评价</string>
+    <string name="orderComplaintString">订单投诉</string>
+    <string name="anonymousString">匿名评价</string>
+    <string name="userEvaluateString">个人评价</string>
+    <string name="describeStarString">描述相符</string>
+    <string name="wholeStarString">整体评分</string>
+    <string name="myFocusString">我的关注</string>
+    <string name="tutorString">导师机构</string>
+    <string name="balanceString">余额</string>
+    <string name="cashString">提现</string>
+    <string name="rechargeString">充值</string>
+    <string name="cashAccountString">提现账户管理</string>
+    <string name="ordercodeString">订单编号</string>
+    <string name="historyString">历史账单</string>
+    <string name="adresstring">邮件地址</string>
+
+
+    <string name="pull_down_refresh_label">下拉可以刷新</string>
+    <string name="pull_down_release_label">松开立即刷新</string>
+    <string name="pull_down_refreshing_label">正在刷新数据</string>
+    <string name="pull_up_load_label">上拉加载</string>
+    <string name="pull_up_loading_label">正在加载数据</string>
 
 
     <string name="eg1">常青藤学校</string>

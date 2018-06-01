@@ -19,6 +19,8 @@ import com.lzy.okgo.cache.CacheMode;
 import com.lzy.okgo.model.HttpParams;
 import com.lzy.okgo.model.Response;
 import com.xinyi.studyabroad.R;
+import com.xinyi.studyabroad.activities.ComplaintActivity;
+import com.xinyi.studyabroad.activities.EvaluateActivity;
 import com.xinyi.studyabroad.activities.OrderManagerActivity;
 import com.xinyi.studyabroad.activities.SubScribeActivity;
 import com.xinyi.studyabroad.activities.VideoActivity;
@@ -123,8 +125,8 @@ public class OrderAdapter extends BaseAdapter<OrderAdapter.ViewHolder> {
             changeVisbility(0, holder);
         } else if (order_status.equals("4")) {
             holder.left_tv.setText(R.string.finishServiceString);
-            holder.right_tv.setText("");
-            changeVisbility(1, holder);
+            holder.right_tv.setText(R.string.LaunchVideoString);
+            changeVisbility(0, holder);
         } else if (order_status.equals("5")) {
             if (identity_flag.equals("1")) {
                 holder.left_tv.setText(R.string.complaintString);
@@ -169,7 +171,7 @@ public class OrderAdapter extends BaseAdapter<OrderAdapter.ViewHolder> {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
-                        if (order_status.equals("3")) {
+                        if (order_status.equals("3")||order_status.equals("4")) {
                             //视频聊天
 
                             long currentTime = System.currentTimeMillis() / 1000;
@@ -235,8 +237,14 @@ public class OrderAdapter extends BaseAdapter<OrderAdapter.ViewHolder> {
                             doOrderOperation(position, map.get("order_code"), "end", "");
                         } else if (order_status.equals("5")) {
                             //投诉
+                            Intent it=new Intent(context, ComplaintActivity.class);
+                            it.putExtra(ComplaintActivity.ORDER_CODE,map.get("order_code"));
+                            context.startActivity(it);
                         } else if (order_status.equals("6")) {
                             //去评价
+                            Intent it=new Intent(context, EvaluateActivity.class);
+                            it.putExtra(EvaluateActivity.ORDER_CODE,map.get("order_code"));
+                            context.startActivity(it);
                         } else {
                             //删除订单
                             doOrderOperation(position, map.get("order_code"), "delete",

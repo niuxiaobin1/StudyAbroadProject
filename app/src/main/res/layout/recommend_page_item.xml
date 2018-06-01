@@ -5,6 +5,7 @@
     android:layout_height="wrap_content">
 
     <ImageView
+        android:scaleType="fitCenter"
         android:id="@+id/recommendImage"
         android:src="@mipmap/academy_action_bar_bg"
         android:layout_width="match_parent"
